@@ -1,17 +1,28 @@
 function photographerFactory(data) {
-    const { name, portrait } = data;
+    const { name, id, city, country, tagline, price, portrait } = data;
 
-    const picture = `assets/photographers/${portrait}`;
+    const getUserCardDOM = () => {
 
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
-        return (article);
-    }
-    return { name, picture, getUserCardDOM }
+        // const article = document.createElement( 'article' );
+        // article.setAttribute('id', `photographer--${id}`);
+
+        // article.innerHTML = `<img src="assets/photographers/${portrait}">
+        //                     <h2>${name}</h2>
+        //                     <p>${city}, ${country}</p>
+        //                     <p>${tagline}s</p>
+        //                     <p>${price}</p>`;
+
+        // return article;
+
+        return document.createRange().createContextualFragment(
+                            `<article id=""photographer--${id}">
+                                <img src="assets/photographers/${portrait}" alt="portrait de ${portrait}">
+                                <h2>${name}</h2>
+                                <p class="photographer_section__location">${city}, ${country}</p>
+                                <p class="photographer_section__tagline">${tagline}s</p>
+                                <p class="photographer_section__price">${price}€/jour</p>
+                            </article>`);
+    };
+
+    return { name, id, city, country, tagline, price, portrait, getUserCardDOM }
 }
