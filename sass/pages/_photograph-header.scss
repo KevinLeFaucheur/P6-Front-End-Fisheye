@@ -1,0 +1,44 @@
+.photograph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    // margin-top: 100px;
+    background-color: #FAFAFA;
+    height: 300px;
+    margin: 0 100px;
+
+    .contact_button {
+        order: 1;
+    }
+    
+    h1 {
+        color: #D3573C;
+        font-size: 2em;
+        font-weight: 500;
+        margin: 0;
+    }
+    
+    img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        order: 2;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.7em;
+        font-weight: 600;
+    }
+
+    &__location {
+        color: #D3573C;
+    }
+
+    &__tagline {
+        // color: #D3573C;
+    }
+}
