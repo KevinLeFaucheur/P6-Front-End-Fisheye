@@ -5,8 +5,8 @@ export const pricingInsertFactory = (data) => {
 
         return document.createRange().createContextualFragment(
                             `<aside id="pricing-insert">
-                                <div id="pricing-inster__likes">999 999♥</div>
-                                <div id="pricing-inster__price">${price}€/jour</div>
+                                <div id="pricing-insert__likes">999 999♥</div>
+                                <div id="pricing-insert__price">${price}€/jour</div>
                             </aside>`);
     };
 

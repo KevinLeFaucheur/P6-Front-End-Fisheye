@@ -73,7 +73,7 @@ header h1 {
 }
 .photograph-header h1 {
   color: #D3573C;
-  font-size: 2em;
+  font-size: 3em;
   font-weight: 500;
   margin: 0;
 }
@@ -87,12 +87,37 @@ header h1 {
 }
 .photograph-header p {
   margin: 0;
-  font-size: 0.7em;
-  font-weight: 600;
+  font-size: 1em;
+  font-weight: 500;
+  margin-top: 1em;
 }
 .photograph-header__location {
   color: #D3573C;
 }
+
+.media-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 100px;
+}
+.media-section article {
+  margin: 2% 0;
+}
+.media-section img {
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.media-section__body {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #D3573C;
+}
+
 .contact_button {
   font-size: 20px;
   font-weight: bold;
