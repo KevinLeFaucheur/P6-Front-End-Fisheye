@@ -7,12 +7,8 @@ async function getPhotographers() {
                                         return response.json();
                                     }
                                 })
-                                // .then(json => {
-                                //     this.photographers = json.photographers;
-                                //     console.log(this.photographers);
-                                // })
                                 .catch(error => {
-                                    // 
+                                    console.error(error);
                                 });    
     return ( photographers );
 }
@@ -23,32 +19,20 @@ async function displayData(photographers) {
     photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
-        // console.log(userCardDOM.firstChild);
         photographersSection.appendChild(userCardDOM);
     });
-                                
-    const list = document.getElementsByClassName("test");
-    for (const el of list) {
-        el.addEventListener('click', () => {
-            console.log(photographers.filter(obj => { return obj.id == el.parentElement.id }));
-        });
-    }
+          
+    // const photographerLinks = document.getElementsByClassName("photographer_section__link");
+    // for (const link of photographerLinks) {
+    //     link.addEventListener('click', () => {
+    //         console.log(photographers.filter(obj => { return obj.id == link.parentElement.id }));
+    //     });
+    // }
 };
 
 async function init() {
-    // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
     displayData(photographers);
 };
 
 init();
-
-// document.getElementsByClassName('test').forEach(element => console.log(element.className));
-// console.log(document.getElementsByClassName('test'));
-
-// Array.from(document.getElementsByClassName("test")).forEach(function(item) {
-//     console.log(item.id);
-//  });
-//     element.addEventListener('click', () => {
-//     console.log(element.className);
-// }));

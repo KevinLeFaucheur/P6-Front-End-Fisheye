@@ -3,20 +3,9 @@ function photographerFactory(data) {
 
     const getUserCardDOM = () => {
 
-        // const article = document.createElement( 'article' );
-        // article.setAttribute('id', `photographer--${id}`);
-
-        // article.innerHTML = `<img src="assets/photographers/${portrait}">
-        //                     <h2>${name}</h2>
-        //                     <p>${city}, ${country}</p>
-        //                     <p>${tagline}s</p>
-        //                     <p>${price}</p>`;
-
-        // return article;
-
         return document.createRange().createContextualFragment(
                             `<article id="${id}">
-                                <a class="test" href="./photographer.html?id=${id}">
+                                <a class="photographer_section__link" href="./photographer.html?id=${id}">
                                     <img src="assets/photographers/${portrait}" alt="portrait de ${portrait}">
                                 </a>
                                 <h2>${name}</h2>

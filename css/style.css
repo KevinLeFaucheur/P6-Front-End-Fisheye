@@ -59,4 +59,90 @@ header h1 {
   color: grey;
 }
 
+.photograph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  background-color: #FAFAFA;
+  height: 300px;
+  margin: 0 100px;
+}
+.photograph-header .contact_button {
+  order: 1;
+}
+.photograph-header h1 {
+  color: #D3573C;
+  font-size: 3em;
+  font-weight: 500;
+  margin: 0;
+}
+.photograph-header img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  order: 2;
+}
+.photograph-header p {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 500;
+  margin-top: 1em;
+}
+.photograph-header__location {
+  color: #D3573C;
+}
+
+.media-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 100px;
+}
+.media-section article {
+  margin: 2% 0;
+}
+.media-section img {
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.media-section__body {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #D3573C;
+}
+
+.contact_button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pricing-insert {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DB8876;
+  position: fixed;
+  bottom: 0;
+  right: 2%;
+  padding: 1em 1.7em;
+  width: 20vw;
+  border-radius: 5px 5px 0 0;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
 /*# sourceMappingURL=style.css.map */
