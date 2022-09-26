@@ -1,4 +1,7 @@
-export const getPhotographers = async () => await (await fetch('../data/photographers.json')).json();
+const getPhotographers = async () => {
+    const response = await fetch('../data/photographers.json');
+    return response.json();
+};
 
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
