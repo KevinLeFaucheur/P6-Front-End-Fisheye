@@ -3,20 +3,9 @@ import { photographerHeaderFactory } from "../factories/photographerHeaderFactor
 import { pricingInsertFactory } from "../factories/pricingInsertFactory.js";
 import { mediaFactory } from "../factories/mediaFactory.js";
 
-async function getPhotographers() {
+// import { getPhotographers } from "../pages/index.js";
 
-    const request = '../data/photographers.json';
-    const photographers = await fetch(request)
-                                .then(response => {
-                                    if(response.ok) {
-                                        return response.json();
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                });    
-    return ( photographers );
-}
+const getPhotographers = async () => await (await fetch('../data/photographers.json')).json();
 
 const photographersData = await getPhotographers();
 

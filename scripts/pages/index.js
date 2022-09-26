@@ -1,17 +1,4 @@
-async function getPhotographers() {
-
-    const request = './data/photographers.json';
-    const photographers = await fetch(request)
-                                .then(response => {
-                                    if(response.ok) {
-                                        return response.json();
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                });    
-    return ( photographers );
-}
+export const getPhotographers = async () => await (await fetch('../data/photographers.json')).json();
 
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
