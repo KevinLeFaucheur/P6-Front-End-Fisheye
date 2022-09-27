@@ -1,19 +1,7 @@
-async function getPhotographers() {
+import { getPhotographers } from "../utils/getPhotographerData.js";
+import { photographerFactory } from "../factories/photographer.js";
 
-    const request = './data/photographers.json';
-    const photographers = await fetch(request)
-                                .then(response => {
-                                    if(response.ok) {
-                                        return response.json();
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                });    
-    return ( photographers );
-}
-
-async function displayData(photographers) {
+const displayData = async (photographers) => {
     const photographersSection = document.querySelector(".photographer_section");
 
     photographers.forEach((photographer) => {
@@ -30,7 +18,7 @@ async function displayData(photographers) {
     // }
 };
 
-async function init() {
+const init = async () => {
     const { photographers } = await getPhotographers();
     displayData(photographers);
 };

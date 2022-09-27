@@ -5,7 +5,6 @@ export function photographerHeaderFactory(data) {
 
         const header = document.querySelector('.photograph-header');
 
-        // TODO change css class
         return document.createRange().createContextualFragment(
                             `<div>   
                                 <h1>${name}</h1>
