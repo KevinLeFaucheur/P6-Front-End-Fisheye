@@ -43,6 +43,15 @@ $modal-duration: 0.5s;
             text-align: left;
         }
     }
+
+    &__validation {    
+        position: absolute;
+        width: 84%;
+        top: 42%;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 500;
+    }
 }
 
 @keyframes modalopen {
