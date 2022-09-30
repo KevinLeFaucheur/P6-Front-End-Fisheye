@@ -8,7 +8,7 @@ export const mediaFactory = (data, name) => {
           `<article>
               <img class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view" onclick="displayLightbox()"></img>
               <div class="media-section__body">
-                  <span>${title}</span><span>${likes} <i class="fa-solid fa-heart"></i></span>
+                  <span>${title}</span><span class="likes" id="${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
               </div>
           </article>`);
   };

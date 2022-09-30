@@ -7,10 +7,14 @@ import { mediaFactory } from "../factories/mediaFactory.js";
 const currentPageParamId = parseInt(new URLSearchParams(window.location.search).get('id'));
 const photographersData = await getPhotographers();
 const currentPagePhotographerData = photographersData.photographers.filter(object => object.id == currentPageParamId)[0];
-let likesTotal = 0;
 
 const getMediasByPhotographerId = async (data, id) => {
     return [...data.media].filter(element => element.photographerId == id);
+};
+// const mediasData = await getMediasByPhotographerId(photographersData, currentPageParamId);
+
+const addLike = (imageId, likeCount) => {
+    document.getElementById(imageId).innerHTML = likeCount++ + ' <i class="media-section__like fa-solid fa-heart"></i>';
 };
 
 const displayHeaderData = async () => {
@@ -29,22 +33,33 @@ const displayMediaData = async () => {
     main.appendChild(mediaSection);
 
     // get current page medias by photographer id
-    const mediasData = getMediasByPhotographerId(photographersData, currentPageParamId);
+    const mediasData = await getMediasByPhotographerId(photographersData, currentPageParamId);
     
-    (await mediasData).forEach(media => {
+    mediasData.forEach(media => {
         const mediaDOM = mediaFactory(media, currentPagePhotographerData.name);
-        console.log(currentPagePhotographerData.likes);
-        likesTotal += parseInt(currentPagePhotographerData.likes);
-        
+
         mediaSection.appendChild(mediaDOM.getMediaDOM());
     });
 
-    console.log(likesTotal);
+    const medias = document.querySelectorAll('.media-section__image');
+    medias.forEach(image => image.addEventListener('click', displayLightbox));
+
+    const likes = document.querySelectorAll('.media-section__like');
+    likes.forEach(element => element.addEventListener('click', addLike(element.parentElement.id, parseInt(element.parentElement.textContent))));
 };
+
+const getTotalLikes = () => {
+    let totalLikes = 0;
+    const likes = document.querySelectorAll('.likes');
+    likes.forEach(element => totalLikes += parseInt(element.textContent));
+    console.log(likes);
+    
+    return totalLikes;
+}
 
 const displayInsertData = async () => {
     const main = document.getElementById('main');
-    const pricingInsertData = pricingInsertFactory(currentPagePhotographerData, likesTotal);
+    const pricingInsertData = pricingInsertFactory(currentPagePhotographerData, getTotalLikes());
     const pricingInsertDOM = pricingInsertData.getInsertDOM();
 
     main.appendChild(pricingInsertDOM);

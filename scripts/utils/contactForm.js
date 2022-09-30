@@ -1,46 +1,46 @@
 const displayModal = () => {
-    const modal = document.getElementById("contact_modal");
+  const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
 };
 
 const closeModal = () => {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+  const modal = document.getElementById("contact_modal");
+  modal.style.display = "none";
 };
 
 const modalFactory = (name) => {
   
-    const getModalDOM = () => {
-  
-      return document.createRange().createContextualFragment(
-            `<div id="contact_modal">
-              <div class="modal" role="dialog" aria-labelledby="dialogHeader" aria-describedby="dialogHeader">
-                <header id="modal__header">
-                  <h2 id="dialogHeader">Contactez-moi ${name}</h2>
-                  <img src="assets/icons/close.svg" onclick="closeModal()"/>
-                </header>
-                <form id="modal__form" name="contact-form" action="" method="post" onsubmit="validate(event); return false;">
-                  <div>
-                    <label for="first-name">Prénom</label>
-                    <input id="first-name" aria-labelledby="First Name" name="first-name""/>
+  const getModalDOM = () => {
 
-                    <label for="last-name">Nom</label>
-                    <input id="last-name" aria-labelledby="Last Name" name="last-name"/>
+    return document.createRange().createContextualFragment(
+      `<div id="contact_modal">
+        <div class="modal" role="dialog" aria-labelledby="dialogHeader" aria-describedby="dialogHeader">
+          <header id="modal__header">
+            <h2 id="dialogHeader">Contactez-moi ${name}</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()"/>
+          </header>
+          <form id="modal__form" name="contact-form" action="" method="post" onsubmit="validate(event); return false;">
+            <div>
+              <label for="first-name">Prénom</label>
+              <input id="first-name" aria-labelledby="First Name" name="first-name""/>
 
-                    <label for="email">Email</label>
-                    <input id="email" aria-labelledby="Email" name="email" required/>
+              <label for="last-name">Nom</label>
+              <input id="last-name" aria-labelledby="Last Name" name="last-name"/>
 
-                    <label for="message">Votre message</label>
-                    <textarea id="message" aria-labelledby="Your Message" name="message" rows="8"></textarea>
-                  </div>
-                  <button class="contact_button" type="submit">Envoyer</button>
-                </form>
-              </div>
-            </div>`);
-    };
-  
-    return { getModalDOM }
+              <label for="email">Email</label>
+              <input id="email" aria-labelledby="Email" name="email" required/>
+
+              <label for="message">Votre message</label>
+              <textarea id="message" aria-labelledby="Your Message" name="message" rows="8"></textarea>
+            </div>
+            <button class="contact_button" type="submit">Envoyer</button>
+          </form>
+        </div>
+      </div>`);
   };
+
+  return { getModalDOM }
+};
 
 const form = [
   {
