@@ -45,10 +45,22 @@ const displayMediaData = async () => {
     });
 };
 
+const initModal = () => {
+    const modalDOM = modalFactory(currentPagePhotographerData.name);
+    document.getElementById('main').after(modalDOM.getModalDOM());
+};
+
+const initLightbox = () => {
+    const lightboxDOM = lightboxFactory(currentPagePhotographerData.name);
+    document.getElementById('main').after(lightboxDOM.getLightboxDOM());
+};
+
 const init = async () => {
     displayHeaderData();
     displayMediaData();
     displayInsertData();
+    initModal();
+    initLightbox();
 };
 
 init();
