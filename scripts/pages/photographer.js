@@ -7,6 +7,7 @@ import { mediaFactory } from "../factories/mediaFactory.js";
 const currentPageParamId = parseInt(new URLSearchParams(window.location.search).get('id'));
 const photographersData = await getPhotographers();
 const currentPagePhotographerData = photographersData.photographers.filter(object => object.id == currentPageParamId)[0];
+let likesTotal = 0;
 
 const getMediasByPhotographerId = async (data, id) => {
     return [...data.media].filter(element => element.photographerId == id);
@@ -18,14 +19,6 @@ const displayHeaderData = async () => {
     const photographerHeaderDOM = photographerHeaderData.getHeaderDOM();
 
     photographerHeader.appendChild(photographerHeaderDOM);
-};
-
-const displayInsertData = async () => {
-    const main = document.getElementById('main');
-    const pricingInsertData = pricingInsertFactory(currentPagePhotographerData);
-    const pricingInsertDOM = pricingInsertData.getInsertDOM();
-
-    main.appendChild(pricingInsertDOM);
 };
 
 const displayMediaData = async () => {
@@ -40,9 +33,21 @@ const displayMediaData = async () => {
     
     (await mediasData).forEach(media => {
         const mediaDOM = mediaFactory(media, currentPagePhotographerData.name);
+        console.log(currentPagePhotographerData.likes);
+        likesTotal += parseInt(currentPagePhotographerData.likes);
         
         mediaSection.appendChild(mediaDOM.getMediaDOM());
     });
+
+    console.log(likesTotal);
+};
+
+const displayInsertData = async () => {
+    const main = document.getElementById('main');
+    const pricingInsertData = pricingInsertFactory(currentPagePhotographerData, likesTotal);
+    const pricingInsertDOM = pricingInsertData.getInsertDOM();
+
+    main.appendChild(pricingInsertDOM);
 };
 
 const initModal = () => {

@@ -1,14 +1,14 @@
-export const pricingInsertFactory = (data) => {
-    const { name, id, city, country, tagline, price, portrait } = data;
+export const pricingInsertFactory = (data, likes) => {
+    const { price } = data;
 
     const getInsertDOM = () => {
 
         return document.createRange().createContextualFragment(
-                            `<aside id="pricing-insert">
-                                <div id="pricing-insert__likes">999 999♥</div>
+                            `<aside id="pricing-insert" class="hideable">
+                                <div id="pricing-insert__likes">${likes} <i class="fa-solid fa-heart"></i></div>
                                 <div id="pricing-insert__price">${price}€/jour</div>
                             </aside>`);
     };
 
-    return { name, id, city, country, tagline, price, portrait, getInsertDOM }
+    return { price, likes, getInsertDOM }
 };
