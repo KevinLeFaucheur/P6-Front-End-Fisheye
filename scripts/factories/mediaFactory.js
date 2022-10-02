@@ -6,7 +6,7 @@ export const mediaFactory = (data, name) => {
     
     const imageFragment = 
         `<article>
-            <img class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view" onclick="displayLightbox()"></img>
+            <img class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view"></img>
             <div class="media-section__body">
                 <span>${title}</span><span class="likes" id="${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
             </div>
@@ -14,17 +14,16 @@ export const mediaFactory = (data, name) => {
 
     const videoFragment = 
         `<article>
-          <video class="media-section__video">
-            <source src="assets/medias/${folderName}/${video}" type="video/mp4">
-          </video>
+          <video class="media-section__video" src="assets/medias/${folderName}/${video}" type="video/mp4" alt="${title}"></video>
           <div class="media-section__body">
               <span>${title}</span><span class="likes" id="${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
           </div>
         </article>`;
 
-    const mediaFragment = data.hasOwnProperty('image') ? imageFragment : videoFragment; 
+    const mediaNode = document.createRange().createContextualFragment(data.hasOwnProperty('image') ? imageFragment : videoFragment); 
+    mediaNode.querySelector('img, video').addEventListener('click', (event) => displayLightbox(event.target));
 
-    return document.createRange().createContextualFragment(mediaFragment);
+    return mediaNode;
   };
 
   return { id, photographerId, title, image, video, likes, date, price, getMediaDOM }

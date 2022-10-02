@@ -110,12 +110,22 @@ header h1 {
   object-fit: cover;
   cursor: pointer;
 }
+.media-section video {
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+  cursor: pointer;
+}
 .media-section__body {
   display: flex;
   justify-content: space-between;
   font-size: 1.2em;
   font-weight: 600;
   color: #D3573C;
+}
+.media-section__like {
+  cursor: pointer;
 }
 
 .contact_button {
@@ -234,34 +244,38 @@ form #message {
   border-radius: 5px;
 }
 
-#lightbox {
+.lightbox {
   display: none;
 }
-#lightbox__wrapper {
+.lightbox__wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 3em;
 }
-#lightbox__image {
+.lightbox__image {
   width: 50vw;
   height: 50vw;
   box-shadow: 6px 0 rgb(127, 127, 127);
 }
-#lightbox .controls {
+.lightbox__video {
+  width: 50vw;
+  height: 50vw;
+  box-shadow: 6px 0 rgb(127, 127, 127);
+}
+.lightbox .controls {
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #901C1C;
 }
-#lightbox h2 {
+.lightbox h2 {
   font-size: 1.5em;
   color: #901C1C;
   margin-top: 0.5em;
 }
-
 .lightbox__close {
   position: absolute;
   align-self: flex-start;
@@ -269,6 +283,48 @@ form #message {
 }
 .lightbox__button {
   cursor: pointer;
+}
+
+.photographer-sorting {
+  margin: 2% 100px 0;
+}
+.photographer-sorting label {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.sorting-select {
+  box-sizing: border-box;
+  font-size: 1em;
+  font-weight: 600;
+  color: white;
+  padding: 11px;
+  width: 10vw;
+  height: 2%;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  border-color: white;
+  border: 0 0 1px;
+  cursor: pointer;
+}
+.sorting-select::before, .sorting-select::after {
+  box-sizing: border-box;
+}
+.sorting-select option {
+  font-size: 1em;
+  font-weight: 600;
+  height: 2%;
+  width: 8vw;
+  border-radius: 5px;
+  background-color: #901C1C;
+}
+.sorting-select option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.sorting-select:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
 }
 
 /*# sourceMappingURL=style.css.map */

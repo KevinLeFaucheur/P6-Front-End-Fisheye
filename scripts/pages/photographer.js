@@ -10,92 +10,96 @@ const photographersData = await getPhotographers();
 const currentPagePhotographerData = photographersData.photographers.filter(object => object.id == currentPageParamId)[0];
 
 const getMediasByPhotographerId = (data, id) => {
-    return [...data.media].filter(element => element.photographerId == id);
+  return [...data.media].filter(element => element.photographerId == id);
 };
+const mediasData = getMediasByPhotographerId(photographersData, currentPageParamId);
 
 const displayHeaderData = () => {
-    const photographerHeader = document.querySelector(".photograph-header");
-    const photographerHeaderData = photographerHeaderFactory(currentPagePhotographerData);
-    const photographerHeaderDOM = photographerHeaderData.getHeaderDOM();
+  const photographerHeader = document.querySelector(".photograph-header");
+  const photographerHeaderData = photographerHeaderFactory(currentPagePhotographerData);
+  const photographerHeaderDOM = photographerHeaderData.getHeaderDOM();
 
-    photographerHeader.appendChild(photographerHeaderDOM);
+  photographerHeader.appendChild(photographerHeaderDOM);
 };
 
-const displayMediaData = () => {
-    const main = document.getElementById('main');
-    const mediaSection = document.createElement('section');
-    mediaSection.classList.add('media-section');
+const displayMediaData = (option) => {
+  const main = document.getElementById('main');
+  const mediaSection = document.createElement('section');
+  mediaSection.classList.add('media-section');
 
-    main.appendChild(mediaSection);
+  main.appendChild(mediaSection);
+  updateMedias(option);
+};
 
-    // get current page medias by photographer id
-    const mediasData = getMediasByPhotographerId(photographersData, currentPageParamId);
-    
-    mediasData.forEach(media => {
-        const mediaDOM = mediaFactory(media, currentPagePhotographerData.name);
+const updateMedias = (option) => {
+  const mediaSection = document.querySelector('.media-section');
+  mediaSection.innerHTML = '';
+  sortingMediasBy(mediasData, option);
 
-        mediaSection.appendChild(mediaDOM.getMediaDOM());
-    });
+  mediasData.forEach(media => {
+    const mediaDOM = mediaFactory(media, currentPagePhotographerData.name);
+    mediaSection.appendChild(mediaDOM.getMediaDOM());
+  });
 
-    const medias = document.querySelectorAll('.media-section__image, .media-section__video');
-    medias.forEach(image => image.addEventListener('click', displayLightbox));
+  const likes = document.querySelectorAll('.media-section__like');
+  likes.forEach(element => element.addEventListener('click', () => addLike(element.parentElement.id, parseInt(element.parentElement.textContent))));
+};
 
-    const likes = document.querySelectorAll('.media-section__like');
-    likes.forEach(element => element.addEventListener('click', () => addLike(element.parentElement.id, parseInt(element.parentElement.textContent))));
+const sortingMediasBy = (medias, option = 'likes') => {
+  switch (option) {
+    case 'likes': return medias.sort((a, b) => b.likes - a.likes);
+    case 'title': return medias.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0);
+    case 'date': return medias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  }
 };
 
 const getTotalLikes = () => {
-    let totalLikes = 0;
-    document.querySelectorAll('.likes').forEach(element => totalLikes += parseInt(element.textContent));
-    
-    return totalLikes;
+  let totalLikes = 0;
+  document.querySelectorAll('.likes').forEach(element => totalLikes += parseInt(element.textContent));
+  
+  return totalLikes;
 };
 
 const updateTotalLikes = () => {
-    document.getElementById('pricing-insert__likes').innerHTML = `${getTotalLikes()} <i class="fa-solid fa-heart"></i>`;
+  document.getElementById('pricing-insert__likes').innerHTML = `${getTotalLikes()} <i class="fa-solid fa-heart"></i>`;
 };
 
 const addLike = (imageId, likeCount) => {
-    document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>'; // ++
-    updateTotalLikes();
+  document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>'; // ++
+  updateTotalLikes();
 };
 
 const displayInsertData = () => {
-    const main = document.getElementById('main');
-    const pricingInsertData = pricingInsertFactory(currentPagePhotographerData, getTotalLikes());
-    const pricingInsertDOM = pricingInsertData.getInsertDOM();
+  const main = document.getElementById('main');
+  const pricingInsertData = pricingInsertFactory(currentPagePhotographerData, getTotalLikes());
+  const pricingInsertDOM = pricingInsertData.getInsertDOM();
 
-    main.appendChild(pricingInsertDOM);
+  main.appendChild(pricingInsertDOM);
 };
 
 const displaySortingData = () => {
-    const main = document.getElementById('main');
+  const main = document.getElementById('main');
+  const sortingData = sortingFactory(mediasData);
+  const sortingDOM = sortingData.getSortingDOM();
 
-    const mediasData = getMediasByPhotographerId(photographersData, currentPageParamId); // DYR
+  sortingDOM.querySelector('.sorting-select').addEventListener('change', event => {
+    updateMedias(event.target.value);
+  });
 
-    const sortingData = sortingFactory(mediasData);
-    const sortingDOM = sortingData.getSortingDOM();
-
-    main.appendChild(sortingDOM);
+  main.appendChild(sortingDOM);
 };
 
 const initModal = () => {
-    const modalDOM = modalFactory(currentPagePhotographerData.name);
-    document.getElementById('main').after(modalDOM.getModalDOM());
-};
-
-const initLightbox = () => {
-    const lightboxDOM = lightboxFactory(currentPagePhotographerData.name);
-    document.getElementById('main').after(lightboxDOM.getLightboxDOM());
+  const modalDOM = modalFactory(currentPagePhotographerData.name);
+  document.getElementById('main').after(modalDOM.getModalDOM());
 };
 
 const init = async () => {
-    displayHeaderData();
-    displaySortingData();
-    displayMediaData();
-    displayInsertData();
-    initModal();
-    initLightbox();
+  displayHeaderData();
+  displaySortingData();
+  displayMediaData();
+  displayInsertData();
+  initModal();
 };
 
 init();
