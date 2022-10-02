@@ -1,21 +1,16 @@
-const displayLightbox = () => {
-  const main = document.getElementById('main');
-  const header = document.getElementById('header');
-  main.style.display = 'none';
-  header.style.display = 'none';
+const displayLightbox = (target) => {
+  const lightboxDOM = lightboxFactory(target);
+  document.getElementById('main').after(lightboxDOM.getLightboxDOM());
   
-  const lightbox = document.getElementById("lightbox");
-  lightbox.style.display = "block";
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('header').style.display = 'none';
+  document.querySelector(".lightbox").style.display = "block";
 };
 
 const closeLightbox = () => {
-  const main = document.getElementById('main');
-  const header = document.getElementById('header');
-  main.style.display = 'block';
-  header.style.display = 'block';
-  
-  const lightbox = document.getElementById("lightbox");
-  lightbox.style.display = "none";
+  document.getElementById('main').style.display = 'block';
+  document.getElementById('header').style.display = 'block';
+  document.querySelector(".lightbox").style.display = "none";
 };
 
 const goToPreviousItem =() => {
@@ -26,15 +21,16 @@ const goToNextItem =() => {
   console.log('next');
 };
 
-const lightboxFactory = (data, name) => {
-  const { title, image } = data;
+const lightboxFactory = (target) => {
+  const mediaNode = target;
   
   const getLightboxDOM = () => {
-    const folderName = name.match(/[a-z]+[-][a-z]+|[a-z]+/i);
+    mediaNode.className = '';
+    mediaNode.classList.add('lightbox__image');
 
-    return document.createRange().createContextualFragment(
-      `<div id="lightbox">
-        <div role="dialog" id="lightbox__wrapper" aria-label="image closeup view">
+    const lightboxFragment = 
+      `<div class="lightbox">
+        <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
           <div role="button" class="controls controls-left">
             <span class="lightbox__button lightbox__previous">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-left" onclick="goToPreviousItem()"></i>
@@ -44,8 +40,8 @@ const lightboxFactory = (data, name) => {
           </div>
 
           <div class="lightbox__body">
-            <img id="lightbox__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view"/>
-            <h2>${title}</h2>
+            ${mediaNode.outerHTML}
+            <h2>${mediaNode.alt}</h2>
           </div>
 
           <div role="button" class="controls controls-right">
@@ -61,10 +57,12 @@ const lightboxFactory = (data, name) => {
           </div>
 
         </div>
-      </div>`);
+      </div>`;
+
+      const lightboxNode = document.createRange().createContextualFragment(lightboxFragment);
+
+    return lightboxNode;
   };
 
-  return { getLightboxDOM }
+  return { mediaNode, getLightboxDOM }
 };
-
-/* <img id="lightbox__close" src="assets/icons/close.svg" onclick="closeLightbox()"/> */

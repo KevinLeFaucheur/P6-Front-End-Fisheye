@@ -1,4 +1,4 @@
-#lightbox {
+.lightbox {
   display: none;
 
   &__wrapper {
@@ -10,6 +10,12 @@
   }
 
   &__image {
+    width: 50vw;
+    height: 50vw;
+    box-shadow: 6px 0 rgb(127, 127, 127, 1);
+  }
+
+  &__video {
     width: 50vw;
     height: 50vw;
     box-shadow: 6px 0 rgb(127, 127, 127, 1);
@@ -28,25 +34,14 @@
     color: #901C1C;
     margin-top: 0.5em;
   }
-}
 
-.lightbox {
   &__close {
     position: absolute;
     align-self: flex-start;
     color: #901C1C;
-    // top: 0em;
-    // right: 0em;
   }
 
   &__button {
     cursor: pointer;
   }
-
-  // &__previous {
-  // }
-  
-  // &__next {  
-  // }
-  
 }

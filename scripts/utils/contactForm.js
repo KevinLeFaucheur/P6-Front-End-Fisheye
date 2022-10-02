@@ -96,6 +96,5 @@ const showCloseButton = () => {
     closeValidationButton.textContent = "Fermer";
     closeValidationButton.classList.add('contact_button');
     closeValidationButton.addEventListener("click", closeModal);
-    console.log(closeValidationButton);
     document.querySelector('.modal').appendChild(closeValidationButton);
 };
