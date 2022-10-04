@@ -258,6 +258,7 @@ form #message {
   width: 50vw;
   height: 50vw;
   box-shadow: 6px 0 rgb(127, 127, 127);
+  object-fit: cover;
 }
 .lightbox__video {
   width: 50vw;

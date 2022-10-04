@@ -37,8 +37,10 @@ const updateMedias = (option) => {
   sortingMediasBy(mediasData, option);
 
   mediasData.forEach(media => {
-    const mediaDOM = mediaFactory(media, currentPagePhotographerData.name);
-    mediaSection.appendChild(mediaDOM.getMediaDOM());
+    const mediaObject = mediaFactory(media, currentPagePhotographerData.name);
+    const mediaDOM = mediaObject.getMediaDOM();
+    mediaDOM.querySelector('img, video').addEventListener('click', (event) => displayLightbox(mediaObject, mediasData));
+    mediaSection.appendChild(mediaDOM);
   });
 
   const likes = document.querySelectorAll('.media-section__like');
@@ -65,7 +67,7 @@ const updateTotalLikes = () => {
 };
 
 const addLike = (imageId, likeCount) => {
-  document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>'; // ++
+  document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>';  // ++
   updateTotalLikes();
 };
 
@@ -92,13 +94,14 @@ const displaySortingData = () => {
 const initModal = () => {
   const modalDOM = modalFactory(currentPagePhotographerData.name);
   document.getElementById('main').after(modalDOM.getModalDOM());
+  document.querySelector('.contact_button').addEventListener('click', displayModal);
 };
 
 const init = async () => {
   displayHeaderData();
   displaySortingData();
   displayMediaData();
-  displayInsertData();
+  displayInsertData();  
   initModal();
 };
 

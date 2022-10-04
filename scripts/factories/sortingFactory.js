@@ -6,34 +6,15 @@ export const sortingFactory = (data) => {
     sortingFragment.classList.add('photographer-sorting');
 
     const sortingSelect = 
-      `
-      <label for='sorting-select'>Trier par</label>
+      `<label for='sorting-select'>Trier par</label>
       <select name='sorting-select' class='sorting-select'>
           <option value='popularity'>Popularité</option>
           <option value='date'>Date</option>
           <option value='title'>Titre</option>
       </select>`;
 
-    // const sortingSelect = 
-    //   `
-    //   <label for='sorting-select'>Trier par</label>
-    //   <selectmenu name='sorting-select' class='sorting-select'>
-    //     <button slot='button' behavior='button'>
-    //       <labe/>test</label>
-    //     </button>
-    //     <div slot='listbox' behavior='listbox'>
-    //       <option value='popularity'>Popularité</option>
-    //       <option value='date'>Date</option>
-    //       <option value='title'>Titre</option>
-    //     </div>
-    //   </selectmenu>`;
-
     const sortingNode = document.createRange().createContextualFragment(sortingSelect)
     sortingFragment.appendChild(sortingNode);
-    // sortingFragment.querySelector('.sorting-select').addEventListener('change', event => {
-    //     const option = event.target.value;
-    //     sortingMediasBy(medias, option);
-    // });
 
     return sortingFragment;
   };

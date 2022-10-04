@@ -1,12 +1,5 @@
-const displayModal = () => {
-  const modal = document.getElementById("contact_modal");
-  modal.style.display = "block";
-};
-
-const closeModal = () => {
-  const modal = document.getElementById("contact_modal");
-  modal.style.display = "none";
-};
+const displayModal = () => document.getElementById("contact_modal").style.display = "block";
+const closeModal = () => document.getElementById("contact_modal").style.display = "none";
 
 const modalFactory = (name) => {
   
@@ -28,7 +21,7 @@ const modalFactory = (name) => {
               <input id="last-name" aria-labelledby="Last Name" name="last-name"/>
 
               <label for="email">Email</label>
-              <input id="email" aria-labelledby="Email" name="email" required/>
+              <input id="email" aria-labelledby="Email" name="email"/>
 
               <label for="message">Votre message</label>
               <textarea id="message" aria-labelledby="Your Message" name="message" rows="8"></textarea>
@@ -68,13 +61,13 @@ const form = [
 
 let valid = true;
 const validate = (event) => {
-  // form.forEach(element => {
-  //   // if(!element.validation()) { 
-  //   //   console.log(element.errorMessage);
-  //   //   valid = false; 
-  //   // }
-  //   console.log(element);
-  // });
+  form.forEach(element => {
+    // if(!element.validation()) { 
+    //   console.log(element.errorMessage);
+    //   valid = false; 
+    // }
+    console.log(element);
+  });
 
   if(valid) {
     showValidationMessage();
