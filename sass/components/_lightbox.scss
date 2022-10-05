@@ -1,0 +1,48 @@
+.lightbox {
+  display: none;
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 3em;
+  }
+
+  &__image {
+    width: 50vw;
+    height: 50vw;
+    box-shadow: 6px 0 rgb(127, 127, 127, 1);
+    object-fit: cover;
+  }
+
+  &__video {
+    width: 50vw;
+    height: 50vw;
+    box-shadow: 6px 0 rgb(127, 127, 127, 1);
+  }
+
+  .controls {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #901C1C;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    color: #901C1C;
+    margin-top: 0.5em;
+  }
+
+  &__close {
+    position: absolute;
+    align-self: flex-start;
+    color: #901C1C;
+  }
+
+  &__button {
+    cursor: pointer;
+  }
+}
