@@ -16,13 +16,19 @@ const modalFactory = (name) => {
             <div>
               <label for="first-name">Prénom</label>
               <input id="first-name" aria-labelledby="First Name" name="first-name""/>
+            </div>
 
+            <div>
               <label for="last-name">Nom</label>
               <input id="last-name" aria-labelledby="Last Name" name="last-name"/>
+            </div>
 
+            <div>
               <label for="email">Email</label>
               <input id="email" aria-labelledby="Email" name="email"/>
+            </div>
 
+            <div>
               <label for="message">Votre message</label>
               <textarea id="message" aria-labelledby="Your Message" name="message" rows="8"></textarea>
             </div>
@@ -37,38 +43,45 @@ const modalFactory = (name) => {
 
 const form = [
   {
-    element: document.getElementById('first-name'),
+    id: 'first-name',
     errorMessage: 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.',
     validation: function() {
       return /^[a-z][a-z]+$/i.test(this.element.value.trim());
     }
   },
   {
-    element: document.getElementById('last-name'),
+    id: 'last-name',
     errorMessage: 'Veuillez entrer 2 caractères ou plus pour le champ du nom.',
     validation: function() {
       return /^[a-z][a-z]+$/i.test(this.element.value.trim());
     }
   },
   {
-      element: document.getElementById('email'),
+      id: 'email',
       errorMessage: 'Veuillez entrer une adresse mail valide.',
       validation: function() {
           return /^[\w]+@[\w]+\.[\w]+$/.test(this.element.value);
       }
+  },
+  {
+      id: 'message',
+      errorMessage: 'Veuillez entrer 2 caractères ou plus pour votre message.',
+      validation: function() {
+          return /^[\w][\w]+$/i.test(this.element.value);
+      }
   }
 ];
 
-let valid = true;
 const validate = (event) => {
-  form.forEach(element => {
-    // if(!element.validation()) { 
-    //   console.log(element.errorMessage);
-    //   valid = false; 
-    // }
-    console.log(element);
+  let valid = true;
+  form.forEach(object => {
+    object = { ...object, element : document.getElementById(object.id) };
+    if(!object.validation()) { 
+      showError(object.element, object.errorMessage);
+      valid = false; 
+    } else clearError(object.element);
   });
-
+  
   if(valid) {
     showValidationMessage();
     showCloseButton();
@@ -90,4 +103,24 @@ const showCloseButton = () => {
     closeValidationButton.classList.add('contact_button');
     closeValidationButton.addEventListener("click", closeModal);
     document.querySelector('.modal').appendChild(closeValidationButton);
+};
+
+const error = () => {
+    let newError = document.createElement('small');
+    newError.classList.add('error');
+    return newError;
+};
+
+const showError = (element, errorMessage) => {    
+    if(element.parentElement.getElementsByClassName('error').length == 0) {
+        element.parentElement.appendChild(error()).textContent = errorMessage;
+        element.style.borderColor = "red";
+    }
+};
+
+const clearError = (element) => {   
+    if(element.parentElement.getElementsByClassName('error').length > 0) {
+        element.parentElement.querySelector('.error').remove();
+        element.style.borderColor = "black";
+    }
 };
