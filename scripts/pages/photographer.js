@@ -7,6 +7,7 @@ import { sortingFactory } from "../factories/sortingFactory.js";
 
 const currentPageParamId = parseInt(new URLSearchParams(window.location.search).get('id'));
 const photographersData = await getPhotographers();
+console.log(photographersData);
 const currentPagePhotographerData = photographersData.photographers.find(object => object.id == currentPageParamId);
 
 const getMediasByPhotographerId = (data, id) => {
