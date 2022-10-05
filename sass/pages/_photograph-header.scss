@@ -12,7 +12,7 @@
     }
     
     h1 {
-        color: #D3573C;
+        color: $color-primary;
         font-size: 3em;
         font-weight: 500;
         margin: 0;
@@ -35,7 +35,7 @@
     }
 
     &__location {
-        color: #D3573C;
+        color: $color-primary;
     }
 
     // &__tagline {

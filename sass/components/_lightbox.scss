@@ -27,19 +27,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #901C1C;
+    color: $color-primary;
   }
 
   h2 {
     font-size: 1.5em;
-    color: #901C1C;
+    color: $color-primary;
     margin-top: 0.5em;
   }
 
   &__close {
     position: absolute;
     align-self: flex-start;
-    color: #901C1C;
+    color: $color-primary;
   }
 
   &__button {

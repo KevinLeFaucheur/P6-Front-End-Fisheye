@@ -12,7 +12,7 @@
         flex-direction: column;
     
         h2 {
-            color: #D3573C;
+            color: $color-primary;
             font-size: 2em;
             font-weight: 500;
             margin: 0;
@@ -35,7 +35,7 @@
     }
 
     &__location {
-        color: #D3573C;
+        color: $color-primary;
     }
 
     // &__tagline {
@@ -43,6 +43,6 @@
     // }
 
     &__price {
-        color: grey;
+        color: $color-secondary;
     }
 }
