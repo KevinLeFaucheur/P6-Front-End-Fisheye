@@ -13,7 +13,7 @@ $modal-duration: 0.5s;
 .modal {    
     position: relative;
     top: 10%;
-    max-width: 33%;
+    max-width: 35%;
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -71,7 +71,6 @@ form {
     align-items: flex-start;
 
     label {
-        margin-top: 0.4rem;
         color: #312E2E;
         font-size: 1.6em;
     }
@@ -81,7 +80,7 @@ form {
         flex-direction: column;
         width: 100%;
         align-items: self-start;
-        margin-bottom: 26px;
+        padding-bottom: 0.5em;
     }
     
     input {
@@ -95,5 +94,9 @@ form {
     #message {
         width: 100%;
         border-radius: 5px;
+    }
+
+    textarea {
+        resize: vertical;
     }
 }

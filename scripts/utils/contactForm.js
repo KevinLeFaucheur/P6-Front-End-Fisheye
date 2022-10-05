@@ -9,11 +9,11 @@ const modalFactory = (name) => {
       `<div id="contact_modal">
         <div class="modal" role="dialog" aria-labelledby="dialogHeader" aria-describedby="dialogHeader">
           <header id="modal__header">
-            <h2 id="dialogHeader">Contactez-moi ${name}</h2>
+            <h2 id="dialogHeader">Contactez-moi</br>${name}</h2>
             <img src="assets/icons/close.svg" onclick="closeModal()"/>
           </header>
           <form id="modal__form" name="contact-form" action="" method="post" onsubmit="validate(event); return false;">
-            <div>
+            <div role>
               <label for="first-name">Prénom</label>
               <input id="first-name" aria-labelledby="First Name" name="first-name""/>
             </div>
@@ -81,7 +81,7 @@ const validate = (event) => {
       valid = false; 
     } else clearError(object.element);
   });
-  
+
   if(valid) {
     showValidationMessage();
     showCloseButton();

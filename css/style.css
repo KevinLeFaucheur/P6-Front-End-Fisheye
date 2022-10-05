@@ -168,7 +168,7 @@ header h1 {
 .modal {
   position: relative;
   top: 10%;
-  max-width: 33%;
+  max-width: 35%;
   border-radius: 5px;
   background-color: #DB8876;
   width: 50%;
@@ -221,7 +221,6 @@ form {
   align-items: flex-start;
 }
 form label {
-  margin-top: 0.4rem;
   color: #312E2E;
   font-size: 1.6em;
 }
@@ -230,7 +229,7 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
+  padding-bottom: 0.5em;
 }
 form input {
   width: 100%;
@@ -242,6 +241,9 @@ form input {
 form #message {
   width: 100%;
   border-radius: 5px;
+}
+form textarea {
+  resize: vertical;
 }
 
 .lightbox {
@@ -326,6 +328,12 @@ form #message {
 .sorting-select:after {
   border-color: transparent transparent #fff transparent;
   top: 7px;
+}
+
+.error {
+  display: block;
+  color: red;
+  font-size: 1em;
 }
 
 /*# sourceMappingURL=style.css.map */
