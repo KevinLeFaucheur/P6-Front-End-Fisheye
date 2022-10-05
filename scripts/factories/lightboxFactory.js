@@ -1,14 +1,11 @@
 const displayLightbox = (mediaObject, mediasData) => {
-  const lightboxDOM = lightboxFactory(mediaObject);
-  document.getElementById('main').after(lightboxDOM.getLightboxDOM());
+  document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
 
-  document.querySelector('.lightbox__previous').addEventListener('click', () => { 
-    goToPreviousItem(mediaObject.folderName, mediasData);
-  });
+  document.querySelector('.lightbox__previous')
+          .addEventListener('click', () => goToPreviousItem(mediaObject.folderName, mediasData));
 
-  document.querySelector('.lightbox__next').addEventListener('click', () => { 
-    goToNextItem(mediaObject.folderName, mediasData);
-  });
+  document.querySelector('.lightbox__next')
+          .addEventListener('click', () => goToNextItem(mediaObject.folderName, mediasData));
   
   document.getElementById('main').style.display = 'none';
   document.getElementById('header').style.display = 'none';
@@ -22,28 +19,22 @@ const closeLightbox = () => {
 };
 
 const goToPreviousItem = (folderName, mediasData) => {
-
   let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
 
   if(index > 0) index -= 1;
   else index = mediasData.length-1;
 
-  let nextMedia = mediasData[index];
-  nextMedia.folderName = folderName;
-
-  let lightboxBody = document.querySelector('.lightbox__body');
-  lightboxBody.innerHTML = '' + lightboxMedia(nextMedia);
+  let previousMedia = mediasData[index];
+  previousMedia.folderName = folderName;
+  document.querySelector('.lightbox__body').innerHTML = '' + lightboxMedia(previousMedia);
 };
 
 const goToNextItem = (folderName, mediasData) => {
-
   let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
-  let nextMedia = mediasData[(index + 1) % mediasData.length];
-  let nextIndex = (index + 1) % mediasData.length;
-  nextMedia.folderName = folderName;
 
-  let lightboxBody = document.querySelector('.lightbox__body');
-  lightboxBody.innerHTML = '' + lightboxMedia(nextMedia);
+  let nextMedia = mediasData[(index + 1) % mediasData.length];
+  nextMedia.folderName = folderName;
+  document.querySelector('.lightbox__body').innerHTML = '' + lightboxMedia(nextMedia);
 };
 
 const lightboxFactory = (mediaNode) => {
@@ -90,12 +81,12 @@ const lightboxMedia = (mediaNode) => {
   const { id, title, image, video, folderName } = mediaNode;
 
   const imageFragment = 
-      `<img id="${id}" class="lightbox__image" src="assets/medias/${folderName[0]}/${image}" alt="${title}, closeup view"></img>
-      <h2>${title}</h2>`;
+    `<img id="${id}" class="lightbox__image" src="assets/medias/${folderName[0]}/${image}" alt="${title}, closeup view"></img>
+    <h2>${title}</h2>`;
 
   const videoFragment = 
-      `<video controls id="${mediaNode.id}" class="lightbox__image" src="assets/medias/${folderName[0]}/${video}" type="video/mp4" alt="${title}, closeup view"></video>
-      <h2>${title}</h2>`;
+    `<video controls id="${id}" class="lightbox__image" src="assets/medias/${folderName[0]}/${video}" type="video/mp4" alt="${title}, closeup view"></video>
+    <h2>${title}</h2>`;
 
-      return mediaNode.hasOwnProperty('image') && mediaNode.image != undefined ? imageFragment : videoFragment;
+    return image != undefined ? imageFragment : videoFragment;
 };

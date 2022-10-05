@@ -20,7 +20,7 @@ export const mediaFactory = (data, name) => {
           </div>
         </article>`;
 
-    return document.createRange().createContextualFragment(data.hasOwnProperty('image') && data.image != undefined ? imageFragment : videoFragment);
+    return document.createRange().createContextualFragment(image != undefined ? imageFragment : videoFragment);
   };
 
   return { id, photographerId, title, image, video, likes, date, price, folderName, getMediaDOM }
