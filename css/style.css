@@ -20,6 +20,10 @@ header h1 {
   margin-right: 100px;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -123,6 +127,10 @@ header h1 {
   font-size: 1.2em;
   font-weight: 600;
   color: #901C1C;
+}
+.media-section__body h3 {
+  font-size: 1em;
+  margin: 0;
 }
 .media-section__like {
   cursor: pointer;

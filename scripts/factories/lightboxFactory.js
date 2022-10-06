@@ -6,6 +6,10 @@ const displayLightbox = (mediaObject, mediasData) => {
 
   document.querySelector('.lightbox__next')
           .addEventListener('click', () => goToNextItem(mediaObject.folderName, mediasData));
+
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToPreviousItem(mediaObject.folderName, mediasData); } );
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToNextItem(mediaObject.folderName, mediasData); } );
+  document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); } );
   
   document.getElementById('main').style.display = 'none';
   document.getElementById('header').style.display = 'none';

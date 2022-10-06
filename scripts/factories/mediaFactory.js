@@ -6,9 +6,9 @@ export const mediaFactory = (data, name) => {
     
     const imageFragment = 
         `<article>
-            <img id="${id}" class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view"></img>
+            <img id="${id}" class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}"></img>
             <div class="media-section__body">
-                <span>${title}</span><span class="likes" id="like-${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
+              <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
             </div>
           </article>`;
 
@@ -16,7 +16,7 @@ export const mediaFactory = (data, name) => {
         `<article>
           <video id="${id}" class="media-section__video" src="assets/medias/${folderName}/${video}" type="video/mp4" alt="${title}"></video>
           <div class="media-section__body">
-              <span>${title}</span><span class="likes" id="like-${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
+            <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
           </div>
         </article>`;
 
@@ -25,3 +25,6 @@ export const mediaFactory = (data, name) => {
 
   return { id, photographerId, title, image, video, likes, date, price, folderName, getMediaDOM }
 };
+
+
+// {/* <track default kind="descriptions" srclang="en" src="/medias/desc/"> */}

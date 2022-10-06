@@ -9,7 +9,7 @@ export function photographerHeaderFactory(data) {
           <p class="photograph-header__location">${city}, ${country}</p>
           <p class="photograph-header__tagline">${tagline}s</p>
       </div>
-      <img src="assets/photographers/${portrait}" alt="portrait de ${portrait}">`);
+      <img src="assets/photographers/${portrait}" alt="portrait de ${name}">`);
   };
 
   return { name, id, city, country, tagline, price, portrait, getHeaderDOM }

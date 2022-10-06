@@ -12,7 +12,6 @@ const displayData = async (photographers) => {
 
 const init = async () => {
     const { photographers } = await getPhotographers();
-    console.log(photographers);
     displayData(photographers);
 };
 

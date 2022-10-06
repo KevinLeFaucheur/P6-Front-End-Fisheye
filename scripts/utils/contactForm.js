@@ -1,5 +1,16 @@
-const displayModal = () => document.getElementById("contact_modal").style.display = "block";
-const closeModal = () => document.getElementById("contact_modal").style.display = "none";
+const displayModal = () => {
+  document.getElementById('contact_modal').style.display = 'block';
+  document.getElementById('body').classList.add('no-scroll'); 
+  document.getElementById('main').ariaHidden = 'true';
+  document.getElementById('header').ariaHidden = 'true';
+};
+
+const closeModal = () => {
+  document.getElementById('contact_modal').style.display = 'none';
+  document.getElementById('body').classList.remove('no-scroll');
+  document.getElementById('main').ariaHidden = 'false';
+  document.getElementById('header').ariaHidden = 'false';
+};
 
 const modalFactory = (name) => {
   
@@ -7,9 +18,9 @@ const modalFactory = (name) => {
 
     return document.createRange().createContextualFragment(
       `<div id="contact_modal">
-        <div class="modal" role="dialog" aria-labelledby="dialogHeader" aria-describedby="dialogHeader">
+        <div class="modal" role="dialog" aria-describedby="modalTitle">
           <header id="modal__header">
-            <h2 id="dialogHeader">Contactez-moi ${name}</h2>
+            <h2 id="modalTitle">Contactez-moi ${name}</h2>
             <img src="assets/icons/close.svg" onclick="closeModal()"/>
           </header>
           <form id="modal__form" name="contact-form" action="" method="post" onsubmit="validate(event); return false;">
