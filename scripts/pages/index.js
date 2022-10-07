@@ -14,6 +14,7 @@ const init = () => {
 
   Data.init();
   displayPhotographerCards(Data.getPhotographers());
+  console.log(Data.getPhotographers());
   
 };
 
