@@ -11,11 +11,11 @@ export const getPhotographers = () => {
 };
 
 export const getMedias = () => { 
-  let data = JSON.parse(localStorage.getItem('medias'));
+  let data = JSON.parse(localStorage.getItem('media'));
 
   if(data == null) {
     init();
-    return JSON.parse(localStorage.getItem('medias'));
+    return JSON.parse(localStorage.getItem('media'));
   }
   return data;
 };
