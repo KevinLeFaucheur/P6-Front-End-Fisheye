@@ -260,21 +260,23 @@ form #message {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 3em;
+  height: 70vh;
+  padding: 15vh 0;
 }
 .lightbox__image {
-  width: 50vw;
-  height: 50vw;
+  width: 60vw;
+  height: 60vw;
   box-shadow: 6px 0 rgb(127, 127, 127);
   object-fit: cover;
 }
 .lightbox__video {
-  width: 50vw;
-  height: 50vw;
+  width: 60vw;
+  height: 60vw;
   box-shadow: 6px 0 rgb(127, 127, 127);
 }
 .lightbox .controls {
   width: 100px;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;

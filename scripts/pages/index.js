@@ -1,18 +1,20 @@
-import { getPhotographers } from "../utils/getPhotographerData.js";
-import { photographerFactory } from "../factories/photographer.js";
+import * as Data from "../utils/data.js";
+import { photographerCard } from "../factories/photographerCard.js";
 
-const displayData = async (photographers) => {
-    const photographersSection = document.querySelector(".photographer_section");
+const displayPhotographerCards = (photographers) => {
 
-    photographers.forEach((photographer) => {
-        const userCardDOM = photographerFactory(photographer).getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
-    });
+  photographers.forEach((photographer) => {
+    const userCardDOM = photographerCard(photographer).getCardDOM();
+    document.querySelector(".photographer_section").appendChild(userCardDOM);
+  });
+
 };
 
-const init = async () => {
-    const { photographers } = await getPhotographers();
-    displayData(photographers);
+const init = () => {
+
+  Data.init();
+  displayPhotographerCards(Data.getPhotographers());
+  
 };
 
 init();

@@ -1,8 +1,9 @@
-const displayModal = () => {
+export const displayModal = () => {
   document.getElementById('contact_modal').style.display = 'block';
   document.getElementById('body').classList.add('no-scroll'); 
   document.getElementById('main').ariaHidden = 'true';
   document.getElementById('header').ariaHidden = 'true';
+  document.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
 };
 
 const closeModal = () => {
@@ -12,7 +13,7 @@ const closeModal = () => {
   document.getElementById('header').ariaHidden = 'false';
 };
 
-const modalFactory = (name) => {
+export const modalForm = (name) => {
   
   const getModalDOM = () => {
 
@@ -23,7 +24,7 @@ const modalFactory = (name) => {
             <h2 id="modalTitle">Contactez-moi ${name}</h2>
             <img src="assets/icons/close.svg" onclick="closeModal()"/>
           </header>
-          <form id="modal__form" name="contact-form" action="" method="post" onsubmit="validate(event); return false;">
+          <form id="modal__form" name="contact-form" action="" method="post">
             <div>
               <label for="first-name">Prénom</label>
               <input id="first-name" aria-labelledby="First Name" name="first-name""/>
@@ -84,6 +85,7 @@ const form = [
 ];
 
 const validate = (event) => {
+  event.preventDefault();
   let valid = true;
   form.forEach(object => {
     object = { ...object, element : document.getElementById(object.id) };

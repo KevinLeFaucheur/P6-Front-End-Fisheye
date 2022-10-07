@@ -1,18 +1,15 @@
 //Mettre le code JavaScript lié à la page photographer.html
-import { getPhotographers } from "../utils/getPhotographerData.js";
-import { photographerHeaderFactory } from "../factories/photographerHeaderFactory.js";
-import { pricingInsertFactory } from "../factories/pricingInsertFactory.js";
-import { mediaFactory } from "../factories/mediaFactory.js";
+import * as Data from "../utils/data.js";
+import { photographerHeaderFactory } from "../factories/photographerHeader.js";
+import { pricingInsertFactory } from "../factories/pricingInsert.js";
+import { mediaCard } from "../factories/mediaCard.js";
 import { sortingFactory } from "../factories/sortingFactory.js";
+import { displayLightbox } from "../factories/lightbox.js";
+import { modalForm, displayModal } from "../factories/modal.js";
 
 const currentPageParamId = parseInt(new URLSearchParams(window.location.search).get('id'));
-const photographersData = await getPhotographers();
-const currentPagePhotographerData = photographersData.photographers.find(object => object.id == currentPageParamId);
-
-const getMediasByPhotographerId = (data, id) => {
-  return [...data.media].filter(element => element.photographerId == id);
-};
-const mediasData = getMediasByPhotographerId(photographersData, currentPageParamId);
+const currentPagePhotographerData = Data.getPhotographers().find(object => object.id == currentPageParamId);
+const mediasData = Data.getMediasByPhotographerId(currentPageParamId);
 
 const displayHeaderData = () => {
   const photographerHeaderDOM = photographerHeaderFactory(currentPagePhotographerData).getHeaderDOM();
@@ -33,7 +30,7 @@ const updateMedias = (option) => {
   sortingMediasBy(mediasData, option);
 
   mediasData.forEach(media => {
-    const mediaObject = mediaFactory(media, currentPagePhotographerData.name);
+    const mediaObject = mediaCard(media, currentPagePhotographerData.name);
     const mediaDOM = mediaObject.getMediaDOM();
     mediaDOM.querySelector('img, video').addEventListener('click', () => displayLightbox(mediaObject, mediasData));
     mediaSection.appendChild(mediaDOM);
@@ -84,7 +81,7 @@ const displaySortingData = () => {
 };
 
 const initModal = () => {
-  document.getElementById('main').after(modalFactory(currentPagePhotographerData.name).getModalDOM());
+  document.getElementById('main').after(modalForm(currentPagePhotographerData.name).getModalDOM());
   document.querySelector('.contact_button').addEventListener('click', displayModal);
 };
 

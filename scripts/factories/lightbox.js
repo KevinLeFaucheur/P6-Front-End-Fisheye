@@ -1,4 +1,4 @@
-const displayLightbox = (mediaObject, mediasData) => {
+export const displayLightbox = (mediaObject, mediasData) => {
   document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
 
   document.querySelector('.lightbox__previous')
@@ -6,6 +6,9 @@ const displayLightbox = (mediaObject, mediasData) => {
 
   document.querySelector('.lightbox__next')
           .addEventListener('click', () => goToNextItem(mediaObject.folderName, mediasData));
+
+  document.querySelector('.lightbox__close')
+          .addEventListener('click', closeLightbox);
 
   document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToPreviousItem(mediaObject.folderName, mediasData); } );
   document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToNextItem(mediaObject.folderName, mediasData); } );
@@ -48,11 +51,11 @@ const lightboxFactory = (mediaNode) => {
     const lightboxFragment = 
       `<div class="lightbox">
         <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
+
           <div role="button" class="controls controls-left">
             <span class="lightbox__button lightbox__previous">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-left"></i>
             </span>
-
             <p class="sr-only">Previous</p>
           </div>
 
@@ -62,13 +65,12 @@ const lightboxFactory = (mediaNode) => {
 
           <div role="button" class="controls controls-right">
             <span class="lightbox__button lightbox__close">
-              <i class="fa-3x fa-solid fa-x" onclick="closeLightbox()"></i>
+              <i class="fa-3x fa-solid fa-x"></i>
             </span>
-
+            <p class="sr-only">Close</p>
             <span class="lightbox__button lightbox__next">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-right"></i>
             </span>
-
             <p class="sr-only">Next</p>
           </div>
 

@@ -1,4 +1,4 @@
-export const mediaFactory = (data, name) => {
+export const mediaCard = (data, name) => {
   const { id, photographerId, title, image, video, likes, date, price } = data;
   const folderName = name.match(/[a-z]+[-][a-z]+|[a-z]+/i);
 

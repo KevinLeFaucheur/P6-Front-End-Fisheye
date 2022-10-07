@@ -1,7 +1,7 @@
-export function photographerFactory(data) {
+export const photographerCard = (data) => {
     const { name, id, city, country, tagline, price, portrait } = data;
 
-    const getUserCardDOM = () => {
+    const getCardDOM = () => {
 
         return document.createRange().createContextualFragment(
                             `<article id="${id}">
@@ -15,5 +15,5 @@ export function photographerFactory(data) {
                             </article>`);
     };
 
-    return { name, id, city, country, tagline, price, portrait, getUserCardDOM }
-}
+    return { name, id, city, country, tagline, price, portrait, getCardDOM }
+};
