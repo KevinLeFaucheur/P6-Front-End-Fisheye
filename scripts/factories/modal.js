@@ -28,7 +28,7 @@ export const modalForm = (name) => {
         <div class="modal" role="dialog" aria-labelledby="modalTitle">
           <header id="modal__header">
             <h2 id="modalTitle">Contactez-moi ${name}</h2>
-            <img tabindex='0' id='modal__close' src="assets/icons/close.svg"/>
+            <img tabindex='0' aria-label='Close contact form' id='modal__close' src="assets/icons/close.svg"/>
           </header>
           <form id="modal__form" name="contact-form" action="" method="post">
             <div>
