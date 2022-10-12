@@ -1,4 +1,4 @@
-export function photographerHeaderFactory(data) {
+export function photographerHeader(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
 
   const getHeaderDOM = () => {

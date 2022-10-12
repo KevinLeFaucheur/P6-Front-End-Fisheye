@@ -3,7 +3,11 @@ export const displayModal = () => {
   document.getElementById('body').classList.add('no-scroll'); 
   document.getElementById('main').ariaHidden = 'true';
   document.getElementById('header').ariaHidden = 'true';
+  document.getElementById('modal__close').addEventListener('click', closeModal );
+  document.getElementById('modal__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
   document.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
+
+  document.querySelector('.selected').setAttribute('tabindex', '-1');
 };
 
 const closeModal = () => {
@@ -11,6 +15,8 @@ const closeModal = () => {
   document.getElementById('body').classList.remove('no-scroll');
   document.getElementById('main').ariaHidden = 'false';
   document.getElementById('header').ariaHidden = 'false';
+
+  document.querySelector('.selected').setAttribute('tabindex', '0');
 };
 
 export const modalForm = (name) => {
@@ -22,7 +28,7 @@ export const modalForm = (name) => {
         <div class="modal" role="dialog" aria-describedby="modalTitle">
           <header id="modal__header">
             <h2 id="modalTitle">Contactez-moi ${name}</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()"/>
+            <img tabindex='0' id='modal__close' src="assets/icons/close.svg"/>
           </header>
           <form id="modal__form" name="contact-form" action="" method="post">
             <div>
@@ -98,6 +104,9 @@ const validate = (event) => {
   if(valid) {
     showValidationMessage();
     showCloseButton();
+    console.log('----Message Envoyé!----');
+    form.forEach(object => { console.log(document.getElementById(object.id).value); });
+    console.log('-----------------------');
   }
 };
 
@@ -115,7 +124,9 @@ const showCloseButton = () => {
     closeValidationButton.textContent = "Fermer";
     closeValidationButton.classList.add('contact_button');
     closeValidationButton.addEventListener("click", closeModal);
+    closeValidationButton.addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
     document.querySelector('.modal').appendChild(closeValidationButton);
+    closeValidationButton.focus();
 };
 
 const error = () => {

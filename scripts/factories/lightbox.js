@@ -1,4 +1,8 @@
 export const displayLightbox = (mediaObject, mediasData) => {
+
+  // const intervalID = setInterval(() => goToNextItem(mediaObject.folderName, mediasData), 3000);
+  // clearInterval(intervalID);
+
   document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
 
   document.querySelector('.lightbox__previous')
@@ -10,9 +14,13 @@ export const displayLightbox = (mediaObject, mediasData) => {
   document.querySelector('.lightbox__close')
           .addEventListener('click', closeLightbox);
 
-  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToPreviousItem(mediaObject.folderName, mediasData); } );
-  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToNextItem(mediaObject.folderName, mediasData); } );
-  document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); } );
+  // Accessibility
+  document.querySelector('.lightbox__previous').addEventListener('keydown', (event) => { if(event.key === 'Enter') goToPreviousItem(mediaObject.folderName, mediasData) });
+  document.querySelector('.lightbox__next').addEventListener('keydown', (event) => { if(event.key === 'Enter') goToNextItem(mediaObject.folderName, mediasData) });
+  document.querySelector('.lightbox__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeLightbox });
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToPreviousItem(mediaObject.folderName, mediasData); });
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToNextItem(mediaObject.folderName, mediasData); });
+  document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); });
   
   document.getElementById('main').style.display = 'none';
   document.getElementById('header').style.display = 'none';
@@ -37,6 +45,7 @@ const goToPreviousItem = (folderName, mediasData) => {
 };
 
 const goToNextItem = (folderName, mediasData) => {
+  console.log('next');
   let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
 
   let nextMedia = mediasData[(index + 1) % mediasData.length];
@@ -53,10 +62,12 @@ const lightboxFactory = (mediaNode) => {
         <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
 
           <div role="button" class="controls controls-left">
-            <span class="lightbox__button lightbox__previous">
+          
+            <button class="lightbox__button lightbox__previous">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-left"></i>
-            </span>
+            </button>
             <p class="sr-only">Previous</p>
+
           </div>
 
           <div class="lightbox__body">
@@ -64,14 +75,17 @@ const lightboxFactory = (mediaNode) => {
           </div>
 
           <div role="button" class="controls controls-right">
-            <span class="lightbox__button lightbox__close">
-              <i class="fa-3x fa-solid fa-x"></i>
-            </span>
-            <p class="sr-only">Close</p>
-            <span class="lightbox__button lightbox__next">
+
+            <button class="lightbox__button lightbox__next">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-right"></i>
-            </span>
+            </button>
             <p class="sr-only">Next</p>
+
+            <button class="lightbox__button lightbox__close">
+              <i class="fa-3x fa-solid fa-x"></i>
+            </button>
+            <p class="sr-only">Close</p>
+
           </div>
 
         </div>

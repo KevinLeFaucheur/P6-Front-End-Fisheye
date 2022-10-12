@@ -135,7 +135,21 @@ header h1 {
 .media-section__like {
   cursor: pointer;
 }
+.media-section__like:hover {
+  animation: heart 250ms;
+}
 
+@keyframes heart {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .contact_button {
   font-size: 20px;
   font-weight: bold;
@@ -170,13 +184,14 @@ header h1 {
   width: 100%;
   top: 0;
   left: 0;
+  z-index: 11;
   background-color: rgba(26, 39, 156, 0.4);
 }
 
 .modal {
   position: relative;
   top: 10%;
-  max-width: 33%;
+  max-width: 670px;
   border-radius: 5px;
   background-color: #DB8876;
   width: 50%;
@@ -247,9 +262,12 @@ form input {
   border-radius: 5px;
   font-size: 1.5em;
 }
-form #message {
+form textarea {
+  font-family: inherit;
+  font-size: 1.5em;
   width: 100%;
   border-radius: 5px;
+  border: none;
 }
 
 .lightbox {
@@ -280,7 +298,6 @@ form #message {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #901C1C;
 }
 .lightbox h2 {
   font-size: 1.5em;
@@ -294,48 +311,113 @@ form #message {
 }
 .lightbox__button {
   cursor: pointer;
+  order: 1;
+}
+.lightbox button {
+  background-color: #fff;
+  border: none;
+  color: #901C1C;
 }
 
 .photographer-sorting {
   margin: 2% 100px 0;
+  display: flex;
 }
 .photographer-sorting label {
   font-size: 1em;
   font-weight: 600;
+  padding: 12px 24px;
+  margin-right: 1em;
+}
+.photographer-sorting label:focus .photographer-sorting label {
+  background-color: #DB8876;
 }
 
-.sorting-select {
-  box-sizing: border-box;
-  font-size: 1em;
-  font-weight: 600;
-  color: white;
-  padding: 11px;
-  width: 10vw;
-  height: 2%;
-  border: none;
+.select-box {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  position: absolute;
+  left: 15%;
+  z-index: 10;
+}
+.select-box .selected {
   background-color: #901C1C;
+  font-weight: 600;
   border-radius: 5px;
-  border-color: white;
-  border: 0 0 1px;
+  margin-bottom: 2px;
+  color: #fff;
+  position: relative;
+  order: 0;
+  padding: 12px 24px;
   cursor: pointer;
 }
-.sorting-select::before, .sorting-select::after {
-  box-sizing: border-box;
+.select-box .selected::after {
+  font: var(--fa-font-solid);
+  content: "\f107";
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: calc(50% - 8px);
+  transform: all 0.4s;
 }
-.sorting-select option {
-  font-size: 1em;
-  font-weight: 600;
-  height: 2%;
-  width: 8vw;
-  border-radius: 5px;
+.select-box .options-container {
   background-color: #901C1C;
+  color: #fff;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.25s;
+  border-radius: 5px;
+  overflow: hidden;
+  order: 1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
-.sorting-select option:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+.select-box .options-container.active {
+  max-height: 240px;
+  opacity: 1;
 }
-.sorting-select:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
+.select-box .options-container.active + .selected::after {
+  font: var(--fa-font-solid);
+  content: "\f106";
+}
+.select-box .options-container .option {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+.select-box .options-container .option:hover {
+  background-color: #DB8876;
+}
+.select-box label {
+  cursor: pointer;
+}
+
+.radio-wrapper {
+  height: 3em;
+  display: flex;
+  align-items: center;
+}
+.radio-wrapper:hover {
+  background-color: #DB8876;
+}
+.radio-wrapper:focus {
+  background-color: #DB8876;
+}
+.radio-wrapper input {
+  display: none;
+}
+.radio-wrapper input[type=radio]:checked .radio-wrapper {
+  background-color: #DB8876;
+}
+
+.rounded {
+  display: block;
+  align-self: center;
+  margin: 0 10%;
+  width: 80%;
+  border-top: 1px solid #fff;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */

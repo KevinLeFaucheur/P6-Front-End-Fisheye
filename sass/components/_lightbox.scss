@@ -29,7 +29,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $color-primary;
   }
 
   h2 {
@@ -46,5 +45,12 @@
 
   &__button {
     cursor: pointer;
+    order: 1;
+  }
+
+  button {
+    background-color: #fff;
+    border: none;
+    color: $color-primary;
   }
 }

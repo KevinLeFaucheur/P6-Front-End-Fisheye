@@ -1,9 +1,9 @@
 //Mettre le code JavaScript lié à la page photographer.html
 import * as Data from "../utils/data.js";
-import { photographerHeaderFactory } from "../factories/photographerHeader.js";
+import { photographerHeader } from "../factories/photographerHeader.js";
 import { pricingInsertFactory } from "../factories/pricingInsert.js";
 import { mediaCard } from "../factories/mediaCard.js";
-import { sortingFactory } from "../factories/sortingFactory.js";
+import { sorting } from "../factories/sorting.js";
 import { displayLightbox } from "../factories/lightbox.js";
 import { modalForm, displayModal } from "../factories/modal.js";
 
@@ -12,7 +12,7 @@ const currentPagePhotographerData = Data.getPhotographers().find(object => objec
 const mediasData = Data.getMediasByPhotographerId(currentPageParamId);
 
 const displayHeaderData = () => {
-  const photographerHeaderDOM = photographerHeaderFactory(currentPagePhotographerData).getHeaderDOM();
+  const photographerHeaderDOM = photographerHeader(currentPagePhotographerData).getHeaderDOM();
   document.querySelector(".photograph-header").appendChild(photographerHeaderDOM);
 };
 
@@ -24,10 +24,14 @@ const displayMediaData = (option) => {
   updateMedias(option);
 };
 
-const updateMedias = (option) => {
+export const updateMedias = (option) => {
   const mediaSection = document.querySelector('.media-section');
   mediaSection.innerHTML = '';
   sortingMediasBy(mediasData, option);
+
+  // Only debug / soutenance
+  option ??= 'likes';
+  console.log(mediasData.map(media => ({ [option]: media[option === 'popularity' ? 'likes' : option] })));
 
   mediasData.forEach(media => {
     const mediaObject = mediaCard(media, currentPagePhotographerData.name);
@@ -52,7 +56,6 @@ const sortingMediasBy = (medias, option = 'popularity') => {
 const getTotalLikes = () => {
   let totalLikes = 0;
   document.querySelectorAll('.likes').forEach(element => totalLikes += parseInt(element.textContent));
-  
   return totalLikes;
 };
 
@@ -61,7 +64,7 @@ const updateTotalLikes = () => {
 };
 
 const addLike = (imageId, likeCount) => {
-  document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>';  // ++
+  document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>';
   updateTotalLikes();
 };
 
@@ -71,12 +74,7 @@ const displayInsertData = () => {
 };
 
 const displaySortingData = () => {
-  const sortingDOM = sortingFactory(mediasData).getSortingDOM();
-
-  sortingDOM.querySelector('.sorting-select').addEventListener('change', event => {
-    updateMedias(event.target.value);
-  });
-
+  const sortingDOM = sorting(mediasData).getSortingDOM();
   document.getElementById('main').appendChild(sortingDOM);
 };
 
