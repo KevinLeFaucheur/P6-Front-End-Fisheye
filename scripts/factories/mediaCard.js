@@ -6,17 +6,17 @@ export const mediaCard = (data, name) => {
     
     const imageFragment = 
         `<article>
-            <img id="${id}" class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}"></img>
+            <img id="${id}" class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view"></img>
             <div class="media-section__body">
-              <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
+              <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i aria-label='likes' class="media-section__like fa-solid fa-heart"></i></span>
             </div>
           </article>`;
 
     const videoFragment = 
         `<article>
-          <video id="${id}" class="media-section__video" src="assets/medias/${folderName}/${video}" type="video/mp4" alt="${title}"></video>
+          <video id="${id}" class="media-section__video" src="assets/medias/${folderName}/${video}" type="video/mp4" alt="${title}, closeup view"></video>
           <div class="media-section__body">
-            <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i class="media-section__like fa-solid fa-heart"></i></span>
+            <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i aria-label='likes' class="media-section__like fa-solid fa-heart"></i></span>
           </div>
         </article>`;
 

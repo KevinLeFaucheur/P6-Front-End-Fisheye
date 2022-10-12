@@ -6,26 +6,24 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 70vh;
-    padding: 15vh 0;
+    margin-top: 10vh;
   }
 
   &__image {
-    width: 60vw;
-    height: 60vw;
+    width: 80vh;
+    height: 80vh;
     box-shadow: 6px 0 rgb(127, 127, 127, 1);
     object-fit: cover;
   }
 
   &__video {
-    width: 60vw;
-    height: 60vw;
+    width: 80vh;
+    height: 80vh;
     box-shadow: 6px 0 rgb(127, 127, 127, 1);
   }
 
   .controls {
     width: 100px;
-    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;

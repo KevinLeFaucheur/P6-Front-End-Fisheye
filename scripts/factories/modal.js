@@ -25,7 +25,7 @@ export const modalForm = (name) => {
 
     return document.createRange().createContextualFragment(
       `<div id="contact_modal">
-        <div class="modal" role="dialog" aria-describedby="modalTitle">
+        <div class="modal" role="dialog" aria-labelledby="modalTitle">
           <header id="modal__header">
             <h2 id="modalTitle">Contactez-moi ${name}</h2>
             <img tabindex='0' id='modal__close' src="assets/icons/close.svg"/>
@@ -33,22 +33,22 @@ export const modalForm = (name) => {
           <form id="modal__form" name="contact-form" action="" method="post">
             <div>
               <label for="first-name">Prénom</label>
-              <input id="first-name" aria-labelledby="First Name" name="first-name""/>
+              <input type='text' id="first-name" name="first-name""/>
             </div>
 
             <div>
               <label for="last-name">Nom</label>
-              <input id="last-name" aria-labelledby="Last Name" name="last-name"/>
+              <input type='text' id="last-name" name="last-name"/>
             </div>
 
             <div>
               <label for="email">Email</label>
-              <input id="email" aria-labelledby="Email" name="email"/>
+              <input type='text' id="email" name="email"/>
             </div>
 
             <div>
               <label for="message">Votre message</label>
-              <textarea id="message" aria-labelledby="Your Message" name="message" rows="8"></textarea>
+              <textarea id="message" aria-multiline="true" name="message" rows="8"></textarea>
             </div>
             <button class="contact_button" type="submit">Envoyer</button>
           </form>
