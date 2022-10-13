@@ -32,11 +32,13 @@ export const updateMedias = (option) => {
   // Only debug / soutenance
   option ??= 'likes';
   console.log(mediasData.map(media => ({ [option]: media[option === 'popularity' ? 'likes' : option] })));
+  ///
 
   mediasData.forEach(media => {
     const mediaObject = mediaCard(media, currentPagePhotographerData.name);
     const mediaDOM = mediaObject.getMediaDOM();
     mediaDOM.querySelector('img, video').addEventListener('click', () => displayLightbox(mediaObject, mediasData));
+    mediaDOM.querySelector('img, video').addEventListener('keydown', (event) => { if(event.key === 'Enter') displayLightbox(mediaObject, mediasData); } );
     mediaSection.appendChild(mediaDOM);
   });
 

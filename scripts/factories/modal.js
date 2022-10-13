@@ -8,6 +8,8 @@ export const displayModal = () => {
   document.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
 
   document.querySelector('.selected').setAttribute('tabindex', '-1');
+  document.querySelectorAll('article > img, article > video, header > a').forEach(element =>  element.setAttribute('tabindex', '-1'));
+  document.querySelector('.photograph-header > .contact_button').style.display = 'none';
 };
 
 const closeModal = () => {
@@ -17,6 +19,8 @@ const closeModal = () => {
   document.getElementById('header').ariaHidden = 'false';
 
   document.querySelector('.selected').setAttribute('tabindex', '0');
+  document.querySelectorAll('article > img, article > video, header > a').forEach(element =>  element.setAttribute('tabindex', '0'));
+  document.querySelector('.photograph-header > .contact_button').style.display = 'block';
 };
 
 export const modalForm = (name) => {
