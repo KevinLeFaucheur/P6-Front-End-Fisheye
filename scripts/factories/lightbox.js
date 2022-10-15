@@ -45,7 +45,6 @@ const goToPreviousItem = (folderName, mediasData) => {
 };
 
 const goToNextItem = (folderName, mediasData) => {
-  console.log('next');
   let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
 
   let nextMedia = mediasData[(index + 1) % mediasData.length];

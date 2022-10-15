@@ -8,7 +8,7 @@ export const displayModal = () => {
   document.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
 
   document.querySelector('.selected').setAttribute('tabindex', '-1');
-  document.querySelectorAll('article > img, article > video, header > a').forEach(element =>  element.setAttribute('tabindex', '-1'));
+  document.querySelectorAll('article > img, article > video, header > a').forEach(element => element.setAttribute('tabindex', '-1'));
   document.querySelector('.photograph-header > .contact_button').style.display = 'none';
 };
 
