@@ -12,9 +12,8 @@ const displayPhotographerCards = (photographers) => {
 
 const init = () => {
 
-  Data.init();
+  Data.initialize();
   displayPhotographerCards(Data.getPhotographers());
-  console.log(Data.getPhotographers());
   
 };
 

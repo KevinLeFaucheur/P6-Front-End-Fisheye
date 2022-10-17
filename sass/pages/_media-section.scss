@@ -6,7 +6,6 @@
 
     article {
         margin: 2% 0;
-
     }
 
     img {
@@ -32,9 +31,19 @@
         font-weight: 600;
         color: $color-primary;
         
-        h3 {
+        h2 {
             font-size: 1em;
             margin: 0;
+        }
+
+        button {
+            cursor: pointer;
+            color: $color-primary;
+            font-weight: 600;
+            font-size: 1em;
+            background: none;
+            border: none;
+            padding: 0;
         }
     }
 

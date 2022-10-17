@@ -5,19 +5,17 @@ export const displayLightbox = (mediaObject, mediasData) => {
 
   document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
 
-  document.querySelector('.lightbox__previous')
-          .addEventListener('click', () => goToPreviousItem(mediaObject.folderName, mediasData));
+  const lightboxPrevious = document.querySelector('.lightbox__previous');
+  const lightboxNext = document.querySelector('.lightbox__next');
+  const lightboxClose = document.querySelector('.lightbox__close');
 
-  document.querySelector('.lightbox__next')
-          .addEventListener('click', () => goToNextItem(mediaObject.folderName, mediasData));
+  lightboxPrevious.addEventListener('click', () => goToPreviousItem(mediaObject.folderName, mediasData));
+  lightboxNext.addEventListener('click', () => goToNextItem(mediaObject.folderName, mediasData));
+  lightboxClose.addEventListener('click', closeLightbox);
 
-  document.querySelector('.lightbox__close')
-          .addEventListener('click', closeLightbox);
-
-  // Accessibility
-  document.querySelector('.lightbox__previous').addEventListener('keydown', (event) => { if(event.key === 'Enter') goToPreviousItem(mediaObject.folderName, mediasData) });
-  document.querySelector('.lightbox__next').addEventListener('keydown', (event) => { if(event.key === 'Enter') goToNextItem(mediaObject.folderName, mediasData) });
-  document.querySelector('.lightbox__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeLightbox });
+  lightboxPrevious.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToPreviousItem(mediaObject.folderName, mediasData) });
+  lightboxNext.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToNextItem(mediaObject.folderName, mediasData) });
+  lightboxClose.addEventListener('keydown', (event) => { if(event.key === 'Enter') closeLightbox });
   document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToPreviousItem(mediaObject.folderName, mediasData); });
   document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToNextItem(mediaObject.folderName, mediasData); });
   document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); });
@@ -36,7 +34,7 @@ const closeLightbox = () => {
 const goToPreviousItem = (folderName, mediasData) => {
   let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
 
-  if(index > 0) index -= 1;
+  if(index > 0) index--;
   else index = mediasData.length-1;
 
   let previousMedia = mediasData[index];
@@ -52,7 +50,7 @@ const goToNextItem = (folderName, mediasData) => {
   document.querySelector('.lightbox__body').innerHTML = '' + lightboxMedia(nextMedia);
 };
 
-const lightboxFactory = (mediaNode) => {
+const lightboxFactory = (mediaData) => {
   
   const getLightboxDOM = () => {
 
@@ -61,20 +59,17 @@ const lightboxFactory = (mediaNode) => {
         <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
 
           <div role="button" class="controls controls-left">
-          
             <button aria-label='Previous Image' class="lightbox__button lightbox__previous">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-left"></i>
             </button>
             <p class="sr-only">Previous</p>
-
           </div>
 
           <div class="lightbox__body">
-            ${lightboxMedia(mediaNode)}
+            ${lightboxMedia(mediaData)}
           </div>
 
           <div role="button" class="controls controls-right">
-
             <button aria-label='Next Image' class="lightbox__button lightbox__next">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-right"></i>
             </button>
@@ -84,7 +79,6 @@ const lightboxFactory = (mediaNode) => {
               <i class="fa-3x fa-solid fa-x"></i>
             </button>
             <p class="sr-only">Close</p>
-
           </div>
 
         </div>
@@ -93,18 +87,30 @@ const lightboxFactory = (mediaNode) => {
     return document.createRange().createContextualFragment(lightboxFragment);
   };
 
-  return { mediaNode, getLightboxDOM }
+  return { mediaData, getLightboxDOM }
 };
 
-const lightboxMedia = (mediaNode) => {
-  const { id, title, image, video, folderName } = mediaNode;
+const lightboxMedia = (mediaData) => {
+  const { id, title, image, video, folderName } = mediaData;
 
   const imageFragment = 
-    `<img id="${id}" class="lightbox__image" src="assets/medias/${folderName[0]}/${image}" alt="${title}, closeup view"></img>
+    `<img 
+      id="${id}" 
+      class="lightbox__image" 
+      src="assets/medias/${folderName[0]}/${image}" 
+      alt="${title}, closeup view">
+    </img>
     <h2>${title}</h2>`;
 
   const videoFragment = 
-    `<video controls id="${id}" class="lightbox__image" src="assets/medias/${folderName[0]}/${video}" type="video/mp4" alt="${title}, closeup view"></video>
+    `<video 
+      controls 
+      id="${id}" 
+      class="lightbox__image" 
+      src="assets/medias/${folderName[0]}/${video}" 
+      type="video/mp4" 
+      alt="${title}, closeup view">
+    </video>
     <h2>${title}</h2>`;
 
     return image != undefined ? imageFragment : videoFragment;

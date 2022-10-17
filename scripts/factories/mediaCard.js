@@ -3,28 +3,40 @@ export const mediaCard = (data, name) => {
   const folderName = name.match(/[a-z]+[-][a-z]+|[a-z]+/i);
 
   const getMediaDOM = () => {
+
+    const imageFragment = () =>
+      `<img 
+        tabindex='0' 
+        id="${id}" 
+        class="media-section__image" 
+        src="assets/medias/${folderName}/${image}" 
+        alt="${title}, closeup view">
+      </img>`;
+
+    const videoFragment = () =>
+      `<video 
+        tabindex='0' 
+        id="${id}" 
+        class="media-section__video" 
+        src="assets/medias/${folderName}/${video}" 
+        type="video/mp4" 
+        alt="${title}, closeup view">
+      </video>`;
     
-    const imageFragment = 
-        `<article>
-            <img tabindex='0' id="${id}" class="media-section__image" src="assets/medias/${folderName}/${image}" alt="${title}, closeup view"></img>
-            <div class="media-section__body">
-              <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i aria-label='likes' class="media-section__like fa-solid fa-heart"></i></span>
-            </div>
-          </article>`;
+    const mediaFragment = 
+      `<article>
+        ${image != undefined ? imageFragment() : videoFragment()}
+        <div class="media-section__body">
+          <h2>${title}</h2>
+          <span class="likes" id="like-${id}">
+            ${likes} <span aria-label='likes' aria-hidden='true' class="media-section__like fa-solid fa-heart"></span>
+          </span>
+        </button>
+        </div>
+      </article>`;
 
-    const videoFragment = 
-        `<article>
-          <video tabindex='0' id="${id}" class="media-section__video" src="assets/medias/${folderName}/${video}" type="video/mp4" alt="${title}, closeup view"></video>
-          <div class="media-section__body">
-            <h3>${title}</h3><span class="likes" id="like-${id}">${likes} <i aria-label='likes' class="media-section__like fa-solid fa-heart"></i></span>
-          </div>
-        </article>`;
-
-    return document.createRange().createContextualFragment(image != undefined ? imageFragment : videoFragment);
+    return document.createRange().createContextualFragment(mediaFragment);
   };
 
   return { id, photographerId, title, image, video, likes, date, price, folderName, getMediaDOM }
 };
-
-
-// {/* <track default kind="descriptions" srclang="en" src="/medias/desc/"> */}

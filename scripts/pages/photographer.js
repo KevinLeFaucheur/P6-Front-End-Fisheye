@@ -1,5 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
 import * as Data from "../utils/data.js";
+import * as Likes from "../components/likes.js";
 import { photographerHeader } from "../factories/photographerHeader.js";
 import { pricingInsertFactory } from "../factories/pricingInsert.js";
 import { mediaCard } from "../factories/mediaCard.js";
@@ -27,12 +28,12 @@ const displayMediaData = (option) => {
 export const updateMedias = (option) => {
   const mediaSection = document.querySelector('.media-section');
   mediaSection.innerHTML = '';
-  sortingMediasBy(mediasData, option);
+  Data.sortingMediasBy(mediasData, option);
 
   // Only debug / soutenance
   option ??= 'likes';
-  console.log(mediasData.map(media => ({ [option]: media[option === 'popularity' ? 'likes' : option] })));
-  ///
+  console.log('Sorting: ', mediasData.map(media => ({ [option]: media[option === 'popularity' ? 'likes' : option] })));
+  // Debug end
 
   mediasData.forEach(media => {
     const mediaObject = mediaCard(media, currentPagePhotographerData.name);
@@ -42,36 +43,11 @@ export const updateMedias = (option) => {
     mediaSection.appendChild(mediaDOM);
   });
 
-  const likes = document.querySelectorAll('.media-section__like');
-  likes.forEach(element => element.addEventListener('click', 
-    () => addLike(element.parentElement.id, parseInt(element.parentElement.textContent))));
-};
-
-const sortingMediasBy = (medias, option = 'popularity') => {
-  switch (option) {
-    case 'popularity': return medias.sort((a, b) => b.likes - a.likes);
-    case 'title': return medias.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0);
-    case 'date': return medias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-  }
-};
-
-const getTotalLikes = () => {
-  let totalLikes = 0;
-  document.querySelectorAll('.likes').forEach(element => totalLikes += parseInt(element.textContent));
-  return totalLikes;
-};
-
-const updateTotalLikes = () => {
-  document.getElementById('pricing-insert__likes').innerHTML = `${getTotalLikes()} <i class="fa-solid fa-heart"></i>`;
-};
-
-const addLike = (imageId, likeCount) => {
-  document.getElementById(imageId).innerHTML = ++likeCount + ' <i class="media-section__like fa-solid fa-heart"></i>';
-  updateTotalLikes();
+  Likes.setupLikes();
 };
 
 const displayInsertData = () => {
-  const pricingInsertDOM = pricingInsertFactory(currentPagePhotographerData, getTotalLikes()).getInsertDOM();
+  const pricingInsertDOM = pricingInsertFactory(currentPagePhotographerData, Likes.getTotalLikes()).getInsertDOM();
   document.getElementById('main').appendChild(pricingInsertDOM);
 };
 

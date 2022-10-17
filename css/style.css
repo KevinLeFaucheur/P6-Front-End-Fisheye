@@ -134,9 +134,18 @@ header h1 {
   font-weight: 600;
   color: #901C1C;
 }
-.media-section__body h3 {
+.media-section__body h2 {
   font-size: 1em;
   margin: 0;
+}
+.media-section__body button {
+  cursor: pointer;
+  color: #901C1C;
+  font-weight: 600;
+  font-size: 1em;
+  background: none;
+  border: none;
+  padding: 0;
 }
 .media-section__like {
   cursor: pointer;
@@ -346,7 +355,7 @@ form textarea {
   flex-direction: column;
   width: 170px;
   position: absolute;
-  left: 15%;
+  left: 200px;
   z-index: 10;
 }
 .select-box .selected {

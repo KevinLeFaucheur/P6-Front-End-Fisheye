@@ -1,23 +1,27 @@
+const body = document.getElementById('body');
+const main = document.getElementById('main');
+const header = document.getElementById('header');
+
 export const displayModal = () => {
+  body.classList.add('no-scroll'); 
+  main.ariaHidden = 'true';
+  header.ariaHidden = 'true';
+  
   document.getElementById('contact_modal').style.display = 'block';
-  document.getElementById('body').classList.add('no-scroll'); 
-  document.getElementById('main').ariaHidden = 'true';
-  document.getElementById('header').ariaHidden = 'true';
   document.getElementById('modal__close').addEventListener('click', closeModal );
   document.getElementById('modal__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
   document.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
-
   document.querySelector('.selected').setAttribute('tabindex', '-1');
   document.querySelectorAll('article > img, article > video, header > a').forEach(element => element.setAttribute('tabindex', '-1'));
   document.querySelector('.photograph-header > .contact_button').style.display = 'none';
 };
 
 const closeModal = () => {
+  body.classList.remove('no-scroll');
+  main.ariaHidden = 'false';
+  header.ariaHidden = 'false';
+  
   document.getElementById('contact_modal').style.display = 'none';
-  document.getElementById('body').classList.remove('no-scroll');
-  document.getElementById('main').ariaHidden = 'false';
-  document.getElementById('header').ariaHidden = 'false';
-
   document.querySelector('.selected').setAttribute('tabindex', '0');
   document.querySelectorAll('article > img, article > video, header > a').forEach(element =>  element.setAttribute('tabindex', '0'));
   document.querySelector('.photograph-header > .contact_button').style.display = 'block';
@@ -31,26 +35,32 @@ export const modalForm = (name) => {
       `<div id="contact_modal">
         <div class="modal" role="dialog" aria-labelledby="modalTitle">
           <header id="modal__header">
-            <h2 id="modalTitle">Contactez-moi ${name}</h2>
-            <img tabindex='0' aria-label='Close contact form' id='modal__close' src="assets/icons/close.svg"/>
+            <h2 id="modalTitle">Contactez-moi</br> ${name}</h2>
+            <img 
+              tabindex='0' 
+              role='button' 
+              alt='Close contact form' 
+              aria-label='Close contact form' 
+              id='modal__close' 
+              src="assets/icons/close.svg"/>
           </header>
           <form id="modal__form" name="contact-form" action="" method="post">
-            <div>
+            <div class='modal__input-wrapper'>
               <label for="first-name">Prénom</label>
               <input type='text' id="first-name" name="first-name""/>
             </div>
 
-            <div>
+            <div class='modal__input-wrapper'>
               <label for="last-name">Nom</label>
               <input type='text' id="last-name" name="last-name"/>
             </div>
 
-            <div>
+            <div class='modal__input-wrapper'>
               <label for="email">Email</label>
               <input type='text' id="email" name="email"/>
             </div>
 
-            <div>
+            <div class='modal__input-wrapper'>
               <label for="message">Votre message</label>
               <textarea id="message" aria-multiline="true" name="message" rows="8"></textarea>
             </div>

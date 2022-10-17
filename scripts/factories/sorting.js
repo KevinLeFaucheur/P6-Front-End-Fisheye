@@ -8,37 +8,36 @@ export const sorting = (data) => {
     sortingFragment.classList.add('photographer-sorting');
 
     const sortingSelect = 
-    `<label for='sorting-select'>Trier par</label>
-    <div aria-label="Trier Medias" class='select-box'>
-    
-      <div tabindex="0" role='menuitem' class='selected'>
-        Popularité
-      </div>
-    
-      <div role='menu' aria-expanded="false" aria-haspopup='true' class='options-container'>
-    
-        <div tabindex='-1' role='none' class='radio-wrapper'>
-          <input role='menuitem' value='popularity' type='radio' class='radio' id='popularity' name='category'>
-          <label for='popularity'>Popularité</label>
+      `<label for='sorting-select'>Trier par</label>
+      <div aria-label="Trier Medias" class='select-box'>
+      
+        <div tabindex="0" role='menuitem' class='selected'>
+          Popularité
         </div>
-    
-        <hr role='separator' class="rounded">
-    
-        <div tabindex='-1' role='none' class='radio-wrapper'>
-          <input role='menuitem' value='title' type='radio' class='radio' id='title' name='category'>
-          <label for='title'>Titre</label>
+      
+        <div role='menu' aria-expanded="false" aria-haspopup='true' class='options-container'>
+      
+          <div tabindex='-1' role='none' class='radio-wrapper'>
+            <input role='menuitem' value='popularity' type='radio' class='radio' id='popularity' name='category'>
+            <label for='popularity'>Popularité</label>
+          </div>
+      
+          <hr role='separator' class="rounded">
+      
+          <div tabindex='-1' role='none' class='radio-wrapper'>
+            <input role='menuitem' value='title' type='radio' class='radio' id='title' name='category'>
+            <label for='title'>Titre</label>
+          </div>
+          
+          <hr role='separator' class="rounded">
+      
+          <div tabindex='-1' role='none' class='radio-wrapper'>
+            <input role='menuitem' value='date' type='radio' class='radio' id='date' name='category'>
+            <label for='date'>Date</label>
+          </div>
+      
         </div>
-        
-        <hr role='separator' class="rounded">
-    
-        <div tabindex='-1' role='none' class='radio-wrapper'>
-          <input role='menuitem' value='date' type='radio' class='radio' id='date' name='category'>
-          <label for='date'>Date</label>
-        </div>
-    
-      </div>
-    
-    </div>`;
+      </div>`;
 
     const sortingNode = document.createRange().createContextualFragment(sortingSelect);
 
