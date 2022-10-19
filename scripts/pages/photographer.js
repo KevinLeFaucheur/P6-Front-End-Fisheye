@@ -9,21 +9,9 @@ import { displayLightbox } from "../factories/lightbox.js";
 import { modalForm, displayModal } from "../factories/modal.js";
 
 const currentPageParamId = parseInt(new URLSearchParams(window.location.search).get('id'));
-const currentPagePhotographerData = Data.getPhotographers().find(object => object.id == currentPageParamId);
 const mediasData = Data.getMediasByPhotographerId(currentPageParamId);
 
-const displayHeaderData = () => {
-  const photographerHeaderDOM = photographerHeader(currentPagePhotographerData).getHeaderDOM();
-  document.querySelector(".photograph-header").appendChild(photographerHeaderDOM);
-};
-
-const displayMediaData = (option) => {
-  const mediaSection = document.createElement('section');
-  mediaSection.classList.add('media-section');
-  document.getElementById('main').appendChild(mediaSection);
-
-  updateMedias(option);
-};
+const currentPagePhotographerData = Data.getPhotographers().find(object => object.id == currentPageParamId);
 
 export const updateMedias = (option) => {
   const mediaSection = document.querySelector('.media-section');
@@ -33,7 +21,6 @@ export const updateMedias = (option) => {
   // Only debug / soutenance
   option ??= 'likes';
   console.log('Sorting: ', mediasData.map(media => ({ [option]: media[option === 'popularity' ? 'likes' : option] })));
-  // Debug end
 
   mediasData.forEach(media => {
     const mediaObject = mediaCard(media, currentPagePhotographerData.name);
@@ -46,14 +33,27 @@ export const updateMedias = (option) => {
   Likes.setupLikes();
 };
 
-const displayInsertData = () => {
-  const pricingInsertDOM = pricingInsertFactory(currentPagePhotographerData, Likes.getTotalLikes()).getInsertDOM();
-  document.getElementById('main').appendChild(pricingInsertDOM);
+const displayHeaderData = () => {
+  const photographerHeaderDOM = photographerHeader(currentPagePhotographerData).getHeaderDOM();
+  document.querySelector(".photograph-header").appendChild(photographerHeaderDOM);
 };
 
 const displaySortingData = () => {
   const sortingDOM = sorting(mediasData).getSortingDOM();
   document.getElementById('main').appendChild(sortingDOM);
+};
+
+const displayMediaData = (option) => {
+  const mediaSection = document.createElement('section');
+  mediaSection.classList.add('media-section');
+  document.getElementById('main').appendChild(mediaSection);
+
+  updateMedias(option);
+};
+
+const displayInsertData = () => {
+  const pricingInsertDOM = pricingInsertFactory(currentPagePhotographerData, Likes.getTotalLikes()).getInsertDOM();
+  document.getElementById('main').appendChild(pricingInsertDOM);
 };
 
 const initModal = () => {

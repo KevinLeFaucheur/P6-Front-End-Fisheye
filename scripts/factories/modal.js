@@ -8,9 +8,6 @@ export const displayModal = () => {
   header.ariaHidden = 'true';
   
   document.getElementById('contact_modal').style.display = 'block';
-  document.getElementById('modal__close').addEventListener('click', closeModal );
-  document.getElementById('modal__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
-  document.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
   document.querySelector('.selected').setAttribute('tabindex', '-1');
   document.querySelectorAll('article > img, article > video, header > a').forEach(element => element.setAttribute('tabindex', '-1'));
   document.querySelector('.photograph-header > .contact_button').style.display = 'none';
@@ -31,7 +28,7 @@ export const modalForm = (name) => {
   
   const getModalDOM = () => {
 
-    return document.createRange().createContextualFragment(
+    const modalFragment = document.createRange().createContextualFragment(
       `<div id="contact_modal">
         <div class="modal" role="dialog" aria-labelledby="modalTitle">
           <header id="modal__header">
@@ -62,12 +59,18 @@ export const modalForm = (name) => {
 
             <div class='modal__input-wrapper'>
               <label for="message">Votre message</label>
-              <textarea id="message" aria-multiline="true" name="message" rows="8"></textarea>
+              <textarea id="message" aria-multiline="true" name="message" rows="4"></textarea>
             </div>
             <button class="contact_button" type="submit">Envoyer</button>
           </form>
         </div>
       </div>`);
+
+    modalFragment.getElementById('modal__close').addEventListener('click', closeModal );
+    modalFragment.getElementById('modal__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
+    modalFragment.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
+
+    return modalFragment;
   };
 
   return { getModalDOM }
