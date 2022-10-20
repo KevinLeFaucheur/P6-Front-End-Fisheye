@@ -1,13 +1,12 @@
 import { updateMedias } from "../pages/photographer.js";
+import * as Data from "../utils/data.js";
 
 export const sorting = (data) => {
   const { title, likes, date } = data;
 
   const getSortingDOM = () => {
-    const sortingFragment = document.createElement('section');
-    sortingFragment.classList.add('photographer-sorting');
 
-    const sortingSelect = 
+    const sortingFragment = document.createRange().createContextualFragment(
       `<label for='sorting-select'>Trier par</label>
       <div aria-label="Trier Medias" class='select-box'>
       
@@ -37,46 +36,47 @@ export const sorting = (data) => {
           </div>
       
         </div>
-      </div>`;
-
-    const sortingNode = document.createRange().createContextualFragment(sortingSelect);
-
-    sortingFragment.appendChild(sortingNode);
+      </div>`);
 
     const selected = sortingFragment.querySelector('.selected');
     const optionsContainer = sortingFragment.querySelector('.options-container');  
     const optionsList = sortingFragment.querySelectorAll('.radio-wrapper');
 
-    selected.addEventListener('click', () => togglePopup() );
-    selected.addEventListener('keydown', (event) => { if(event.key === 'Enter' || event.key === 'ArrowDown') togglePopup(); } );
+    selected.addEventListener('click', () => toggleSortingMenu() );
+    selected.addEventListener('keydown', (event) => { if(event.key === 'Enter' || event.key === 'ArrowDown') toggleSortingMenu(); } );
 
     optionsList.forEach(option => {
-      option.addEventListener('mousedown', () => {
-        selected.innerHTML = option.querySelector('label').innerHTML;
-        updateMedias(option.querySelector("input").value);
-        togglePopup();
-      });
-
-      option.addEventListener('keydown', (event) => {
-        if(event.key === 'Enter') {
-          selected.innerHTML = option.querySelector('label').innerHTML;
-          updateMedias(option.querySelector("input").value);
-          togglePopup();
-        } 
-      });
+      option.addEventListener('mousedown', () => { processOption(option); });
+      option.addEventListener('keydown', (event) => { if(event.key === 'Enter') { processOption(option); } });
     });
 
-    const togglePopup = () => {
+    const processOption = (option) => {
+      let optionValue = option.querySelector("input").value;
+      selected.innerHTML = option.querySelector('label').innerHTML;
+      let sortedMedias = sortingMediasBy(optionValue);
+
+      console.log(`Sorting by ${optionValue}:`, sortedMedias.map(media => ({ [optionValue]: media[optionValue === 'popularity' ? 'likes' : optionValue] })));
+
+      updateMedias(sortedMedias);
+      toggleSortingMenu();
+    };
+
+    const sortingMediasBy = (option = 'popularity') => {
+      let medias = Data.getMediasByPhotographerId();
+
+      switch (option) {
+        case 'popularity': return medias.sort((a, b) => b.likes - a.likes);
+        case 'title': return medias.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0);
+        case 'date': return medias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+      }
+    };
+
+    const toggleSortingMenu = () => {
       optionsContainer.classList.toggle('active');
       optionsContainer.setAttribute('aria-expanded', optionsContainer.ariaExpanded === 'true' ? 'false' : 'true');
       optionsList.forEach(option => {
         option.setAttribute('tabindex', option.getAttribute('tabindex') == '0' ? '-1' : '0');
       });
-
-      if(optionsContainer.ariaExpanded) {
-        optionsList[0].focus();
-      } else selected.focus();
-
     };
 
     return sortingFragment;

@@ -20,8 +20,8 @@ export const getMedias = () => {
   return data;
 };
 
-export const getMediasByPhotographerId = (id) => { 
-      return getMedias().filter(element => element.photographerId == id);
+export const getMediasByPhotographerId = () => { 
+      return getMedias().filter(element => element.photographerId == getCurrentPageIdParam());
 };
 
 export const initialize = async () => {
@@ -37,10 +37,6 @@ export const initialize = async () => {
   }
 };
 
-export const sortingMediasBy = (medias, option = 'popularity') => {
-  switch (option) {
-    case 'popularity': return medias.sort((a, b) => b.likes - a.likes);
-    case 'title': return medias.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0);
-    case 'date': return medias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-  }
+export const getCurrentPageIdParam = () => {
+  return parseInt(new URLSearchParams(window.location.search).get('id'));
 };

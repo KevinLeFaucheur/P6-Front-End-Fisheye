@@ -5,7 +5,7 @@ export const photographerCard = (data) => {
 
     return document.createRange().createContextualFragment(
       `<article id="${id}">
-          <a class="photographer_section__link" href="./photographer.html?id=${id}">
+          <a title='Page personelle de ${name}' class="photographer_section__link" href="./photographer.html?id=${id}">
               <img src="assets/photographers/${portrait}" alt='${name}'>
               <h2>${name}</h2>
           </a>

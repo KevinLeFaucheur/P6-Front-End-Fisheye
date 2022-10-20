@@ -1,23 +1,24 @@
-export const displayLightbox = (mediaObject, mediasData) => {
+import * as Data from "../utils/data.js";
 
+export const displayLightbox = (mediaObject) => {
   // const intervalID = setInterval(() => goToNextItem(mediaObject.folderName, mediasData), 3000);
   // clearInterval(intervalID);
-
+  
   document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
 
   const lightboxPrevious = document.querySelector('.lightbox__previous');
   const lightboxNext = document.querySelector('.lightbox__next');
   const lightboxClose = document.querySelector('.lightbox__close');
 
-  lightboxPrevious.addEventListener('click', () => goToPreviousItem(mediaObject.folderName, mediasData));
-  lightboxNext.addEventListener('click', () => goToNextItem(mediaObject.folderName, mediasData));
+  lightboxPrevious.addEventListener('click', () => goToItem(mediaObject.folderName, 'previous'));
+  lightboxNext.addEventListener('click', () => goToItem(mediaObject.folderName, 'next'));
   lightboxClose.addEventListener('click', closeLightbox);
 
-  lightboxPrevious.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToPreviousItem(mediaObject.folderName, mediasData) });
-  lightboxNext.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToNextItem(mediaObject.folderName, mediasData) });
+  lightboxPrevious.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToItem(mediaObject.folderName, 'previous') });
+  lightboxNext.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToItem(mediaObject.folderName, 'next') });
   lightboxClose.addEventListener('keydown', (event) => { if(event.key === 'Enter') closeLightbox });
-  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToPreviousItem(mediaObject.folderName, mediasData); });
-  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToNextItem(mediaObject.folderName, mediasData); });
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToItem(mediaObject.folderName, 'previous'); });
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToItem(mediaObject.folderName, 'next'); });
   document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); });
   
   document.getElementById('main').style.display = 'none';
@@ -31,23 +32,20 @@ const closeLightbox = () => {
   document.querySelector('.lightbox').style.display = 'none';
 };
 
-const goToPreviousItem = (folderName, mediasData) => {
+const goToItem = (folderName, direction) => {
+  let mediasData = Data.getMediasByPhotographerId();
   let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
 
-  if(index > 0) index--;
-  else index = mediasData.length-1;
+  if(direction === 'next') {
+    index = (index + 1) % mediasData.length;
+  } else {
+    if(index > 0) index--;
+    else index = mediasData.length-1;
+  }
 
-  let previousMedia = mediasData[index];
-  previousMedia.folderName = folderName;
-  document.querySelector('.lightbox__body').innerHTML = '' + lightboxMedia(previousMedia);
-};
-
-const goToNextItem = (folderName, mediasData) => {
-  let index = mediasData.indexOf(mediasData.find(media => media.id == document.querySelector('.lightbox__image').id));
-
-  let nextMedia = mediasData[(index + 1) % mediasData.length];
-  nextMedia.folderName = folderName;
-  document.querySelector('.lightbox__body').innerHTML = '' + lightboxMedia(nextMedia);
+  let newMedia = mediasData[index];
+  newMedia.folderName = folderName;
+  document.querySelector('.lightbox__body').innerHTML = '' + lightboxMedia(newMedia);
 };
 
 const lightboxFactory = (mediaData) => {
@@ -58,18 +56,18 @@ const lightboxFactory = (mediaData) => {
       `<div class="lightbox">
         <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
 
-          <div role="button" class="controls controls-left">
+          <div class="controls controls-left">
             <button aria-label='Previous Image' class="lightbox__button lightbox__previous">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-left"></i>
             </button>
             <p class="sr-only">Previous</p>
-          </div>
+          </div>  
 
           <div class="lightbox__body">
             ${lightboxMedia(mediaData)}
           </div>
 
-          <div role="button" class="controls controls-right">
+          <div class="controls controls-right">
             <button aria-label='Next Image' class="lightbox__button lightbox__next">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-right"></i>
             </button>

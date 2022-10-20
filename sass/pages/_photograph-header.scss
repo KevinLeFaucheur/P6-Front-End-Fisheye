@@ -1,4 +1,4 @@
-.photograph-header {
+.photographer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,8 +37,4 @@
     &__location {
         color: $color-primary;
     }
-
-    // &__tagline {
-    //     // color: #D3573C;
-    // }
 }

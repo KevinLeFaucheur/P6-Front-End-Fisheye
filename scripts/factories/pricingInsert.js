@@ -1,4 +1,4 @@
-export const pricingInsertFactory = (data, likes) => {
+export const pricingInsert = (data, likes) => {
   const { price } = data;
 
   const getInsertDOM = () => {

@@ -1,27 +1,32 @@
 const body = document.getElementById('body');
 const main = document.getElementById('main');
 const header = document.getElementById('header');
+const contactButton = document.querySelector('.photographer-header > .contact_button');
+// const modal = document.getElementById('contact_modal');
+// const keyboardFocusableElements = document.querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like');
 
 export const displayModal = () => {
   body.classList.add('no-scroll'); 
   main.ariaHidden = 'true';
   header.ariaHidden = 'true';
-  
+  contactButton.style.display = 'none';
+
   document.getElementById('contact_modal').style.display = 'block';
-  document.querySelector('.selected').setAttribute('tabindex', '-1');
-  document.querySelectorAll('article > img, article > video, header > a').forEach(element => element.setAttribute('tabindex', '-1'));
-  document.querySelector('.photograph-header > .contact_button').style.display = 'none';
+  document
+    .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
+    .forEach(element => element.setAttribute('tabindex', '-1'));
 };
 
 const closeModal = () => {
   body.classList.remove('no-scroll');
   main.ariaHidden = 'false';
   header.ariaHidden = 'false';
-  
+  contactButton.style.display = 'block';
+
   document.getElementById('contact_modal').style.display = 'none';
-  document.querySelector('.selected').setAttribute('tabindex', '0');
-  document.querySelectorAll('article > img, article > video, header > a').forEach(element =>  element.setAttribute('tabindex', '0'));
-  document.querySelector('.photograph-header > .contact_button').style.display = 'block';
+  document
+    .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
+    .forEach(element =>  element.setAttribute('tabindex', '0'));
 };
 
 export const modalForm = (name) => {
@@ -66,9 +71,21 @@ export const modalForm = (name) => {
         </div>
       </div>`);
 
-    modalFragment.getElementById('modal__close').addEventListener('click', closeModal );
-    modalFragment.getElementById('modal__close').addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
-    modalFragment.getElementById('modal__form').addEventListener('submit', (event) => { validate(event); } );
+    modalFragment
+      .getElementById('modal__close')
+      .addEventListener('click', closeModal);
+
+    modalFragment
+      .getElementById('modal__close')
+      .addEventListener('keydown', (event) => { 
+        if(event.key === 'Enter') closeModal(); 
+    });
+
+    modalFragment
+      .getElementById('modal__form')
+      .addEventListener('submit', (event) => { 
+        validate(event); 
+    });
 
     return modalFragment;
   };
