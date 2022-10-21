@@ -33,7 +33,7 @@ export const mediaCard = (mediaObject, name) => {
         <div class="photographer-medias__body">
           <h2>${title}</h2>
           <span class="likes" id="like-${id}">
-            ${likes} <span role='button' tabindex='0' aria-label='likes' aria-hidden='true' class="photographer-medias__like fa-solid fa-heart">
+            ${likes} <span role='button' tabindex='0' aria-label='likes' class="photographer-medias__like fa-solid fa-heart">
                      </span>
           </span>
         </button>

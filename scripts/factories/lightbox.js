@@ -52,10 +52,10 @@ const lightboxFactory = (mediaData) => {
             <button aria-label='Next Image' class="lightbox__button lightbox__next">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-right"></i>
             </button>
-            <p id='decribedby-next' class="sr-only">Next</p>
+            <p class="sr-only">Next</p>
 
             <button aria-label='Close dialog' class="lightbox__button lightbox__close">
-              <i class="fa-3x fa-solid fa-x"></i>
+              <i aria-hidden="true" class="fa-3x fa-solid fa-x"></i>
             </button>
             <p class="sr-only">Close</p>
           </div>

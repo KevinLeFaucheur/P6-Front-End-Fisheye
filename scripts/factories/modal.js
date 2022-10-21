@@ -13,6 +13,8 @@ export const displayModal = () => {
   document
     .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
     .forEach(element => element.setAttribute('tabindex', '-1'));
+
+    document.getElementById('modal__close').focus();
 };
 
 const closeModal = () => {
