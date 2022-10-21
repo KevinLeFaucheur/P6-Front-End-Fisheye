@@ -13,8 +13,8 @@
     
     h1 {
         color: $color-primary;
-        font-size: 3em;
-        font-weight: 500;
+        font-size: 64px;
+        font-weight: 300;
         margin: 0;
     }
     
@@ -27,14 +27,15 @@
         order: 2;
     }
 
-    p {
-        margin: 0;
-        font-size: 1em;
-        font-weight: 500;
-        margin-top: 1em;
+    &__location {
+        font-weight: 600;
+        color: $color-primary;
+        font-size: 24px;
     }
 
-    &__location {
-        color: $color-primary;
+    &__tagline {
+        margin: 0;
+        font-size: 18px;
+        margin-top: 1em;
     }
 }

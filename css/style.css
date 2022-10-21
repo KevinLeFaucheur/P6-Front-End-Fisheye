@@ -82,8 +82,8 @@ header h1 {
 }
 .photographer-header h1 {
   color: #901C1C;
-  font-size: 3em;
-  font-weight: 500;
+  font-size: 64px;
+  font-weight: 300;
   margin: 0;
 }
 .photographer-header img {
@@ -94,14 +94,15 @@ header h1 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   order: 2;
 }
-.photographer-header p {
-  margin: 0;
-  font-size: 1em;
-  font-weight: 500;
-  margin-top: 1em;
-}
 .photographer-header__location {
+  font-weight: 600;
   color: #901C1C;
+  font-size: 24px;
+}
+.photographer-header__tagline {
+  margin: 0;
+  font-size: 18px;
+  margin-top: 1em;
 }
 
 .photographer-medias {
@@ -341,7 +342,7 @@ form textarea {
   display: flex;
 }
 .photographer-sorting label {
-  font-size: 1em;
+  font-size: 18px;
   font-weight: 600;
   padding: 12px 0;
   margin-right: 1em;

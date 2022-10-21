@@ -6,8 +6,8 @@ export function photographerHeader(data) {
     return document.createRange().createContextualFragment(
       `<div>   
           <h1>${name}</h1>
-          <p class="photograph-header__location">${city}, ${country}</p>
-          <p class="photograph-header__tagline">${tagline}s</p>
+          <p class="photographer-header__location">${city}, ${country}</p>
+          <p class="photographer-header__tagline">${tagline}s</p>
       </div>
       <img src="assets/photographers/${portrait}" alt="${name}">`);
   };
