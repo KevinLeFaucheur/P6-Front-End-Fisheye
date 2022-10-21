@@ -1,26 +1,7 @@
 import * as Data from "../utils/data.js";
 
 export const displayLightbox = (mediaObject) => {
-  // const intervalID = setInterval(() => goToNextItem(mediaObject.folderName, mediasData), 3000);
-  // clearInterval(intervalID);
-  
   document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
-
-  const lightboxPrevious = document.querySelector('.lightbox__previous');
-  const lightboxNext = document.querySelector('.lightbox__next');
-  const lightboxClose = document.querySelector('.lightbox__close');
-
-  lightboxPrevious.addEventListener('click', () => goToItem(mediaObject.folderName, 'previous'));
-  lightboxNext.addEventListener('click', () => goToItem(mediaObject.folderName, 'next'));
-  lightboxClose.addEventListener('click', closeLightbox);
-
-  lightboxPrevious.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToItem(mediaObject.folderName, 'previous') });
-  lightboxNext.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToItem(mediaObject.folderName, 'next') });
-  lightboxClose.addEventListener('keydown', (event) => { if(event.key === 'Enter') closeLightbox });
-  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToItem(mediaObject.folderName, 'previous'); });
-  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToItem(mediaObject.folderName, 'next'); });
-  document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); });
-  
   document.getElementById('main').style.display = 'none';
   document.getElementById('header').style.display = 'none';
   document.querySelector('.lightbox').style.display = 'block';
@@ -52,7 +33,7 @@ const lightboxFactory = (mediaData) => {
   
   const getLightboxDOM = () => {
 
-    const lightboxFragment = 
+    const lightboxFragment = document.createRange().createContextualFragment(
       `<div class="lightbox">
         <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
 
@@ -71,7 +52,7 @@ const lightboxFactory = (mediaData) => {
             <button aria-label='Next Image' class="lightbox__button lightbox__next">
               <i aria-hidden="true" class="fa-4x fa-solid fa-angle-right"></i>
             </button>
-            <p class="sr-only">Next</p>
+            <p id='decribedby-next' class="sr-only">Next</p>
 
             <button aria-label='Close dialog' class="lightbox__button lightbox__close">
               <i class="fa-3x fa-solid fa-x"></i>
@@ -80,9 +61,11 @@ const lightboxFactory = (mediaData) => {
           </div>
 
         </div>
-      </div>`;
+      </div>`);
 
-    return document.createRange().createContextualFragment(lightboxFragment);
+    lightboxEventListeners(lightboxFragment, mediaData.folderName);
+
+    return lightboxFragment;
   };
 
   return { mediaData, getLightboxDOM }
@@ -113,3 +96,24 @@ const lightboxMedia = (mediaData) => {
 
     return image != undefined ? imageFragment : videoFragment;
 };
+
+const lightboxEventListeners = (fragment, folderName) => { 
+  const lightboxPrevious = fragment.querySelector('.lightbox__previous');
+  const lightboxNext = fragment.querySelector('.lightbox__next');
+  const lightboxClose = fragment.querySelector('.lightbox__close');
+
+  lightboxPrevious.addEventListener('click', () => goToItem(folderName, 'previous'));
+  lightboxNext.addEventListener('click', () => goToItem(folderName, 'next'));
+  lightboxClose.addEventListener('click', closeLightbox);
+
+  lightboxPrevious.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToItem(folderName, 'previous') });
+  lightboxNext.addEventListener('keydown', (event) => { if(event.key === 'Enter') goToItem(folderName, 'next') });
+  lightboxClose.addEventListener('keydown', (event) => { if(event.key === 'Enter') closeLightbox });
+  
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowLeft') goToItem(folderName, 'previous'); });
+  document.addEventListener('keydown', (event) => { if(event.key === 'ArrowRight') goToItem(folderName, 'next'); });
+  document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); });
+};
+
+// const intervalID = setInterval(() => goToNextItem(mediaObject.folderName, mediasData), 3000);
+// clearInterval(intervalID);

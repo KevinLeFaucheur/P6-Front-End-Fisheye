@@ -20,9 +20,9 @@ export const getMedias = () => {
   return data;
 };
 
-export const getMediasByPhotographerId = () => { 
-      return getMedias().filter(element => element.photographerId == getCurrentPageIdParam());
-};
+export const getCurrentPageIdParam = () => parseInt(new URLSearchParams(window.location.search).get('id'));
+
+export const getMediasByPhotographerId = () => getMedias().filter(element => element.photographerId == getCurrentPageIdParam());
 
 export const initialize = async () => {
   let response = await fetch(jsonFile);
@@ -35,8 +35,4 @@ export const initialize = async () => {
   } else {
     console.error(response.status);
   }
-};
-
-export const getCurrentPageIdParam = () => {
-  return parseInt(new URLSearchParams(window.location.search).get('id'));
 };

@@ -6,7 +6,7 @@ import { mediaCard } from "../factories/mediaCard.js";
 import { sorting } from "../factories/sorting.js";
 import { modalForm, displayModal } from "../factories/modal.js";
 
-// DOM elements
+// DOM Elements
 const main = document.getElementById('main');
 const mediaSection = document.querySelector('.photographer-medias');
 const sortingSection = document.querySelector('.photographer-sorting');

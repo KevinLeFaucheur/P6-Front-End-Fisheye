@@ -2,8 +2,6 @@ const body = document.getElementById('body');
 const main = document.getElementById('main');
 const header = document.getElementById('header');
 const contactButton = document.querySelector('.photographer-header > .contact_button');
-// const modal = document.getElementById('contact_modal');
-// const keyboardFocusableElements = document.querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like');
 
 export const displayModal = () => {
   body.classList.add('no-scroll'); 

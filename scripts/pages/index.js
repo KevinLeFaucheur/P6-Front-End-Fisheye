@@ -10,11 +10,11 @@ const displayPhotographerCards = (photographers) => {
 
 };
 
-const init = () => {
+const initialize = () => {
 
   Data.initialize();
   displayPhotographerCards(Data.getPhotographers());
   
 };
 
-init();
+initialize();
