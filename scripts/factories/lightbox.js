@@ -8,9 +8,9 @@ export const displayLightbox = (mediaObject) => {
 };
 
 const closeLightbox = () => {
+  document.getElementById('lightbox').remove();
   document.getElementById('main').style.display = 'block';
   document.getElementById('header').style.display = 'block';
-  document.querySelector('.lightbox').style.display = 'none';
 };
 
 const goToItem = (folderName, direction) => {
@@ -34,7 +34,7 @@ const lightboxFactory = (mediaData) => {
   const getLightboxDOM = () => {
 
     const lightboxFragment = document.createRange().createContextualFragment(
-      `<div class="lightbox">
+      `<div id='lightbox' class="lightbox">
         <div role="dialog" class="lightbox__wrapper" aria-label="image closeup view">
 
           <div class="controls controls-left">
