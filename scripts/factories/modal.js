@@ -172,7 +172,12 @@ const showCloseButton = () => {
     closeValidationButton.textContent = "Fermer";
     closeValidationButton.classList.add('contact_button');
     closeValidationButton.addEventListener("click", closeModal);
-    closeValidationButton.addEventListener('keydown', (event) => { if(event.key === 'Enter') closeModal(); } );
+    closeValidationButton.addEventListener('keydown', (event) => { 
+      if(event.key === 'Enter') {
+        closeModal(); 
+        event.preventDefault();
+      }
+    });
     document.querySelector('.modal').appendChild(closeValidationButton);
     closeValidationButton.focus();
 };

@@ -9,8 +9,8 @@ export const displayLightbox = (mediaObject) => {
   document.getElementById('header').style.display = 'none';
   lightbox.style.display = 'block';
 
-  lightboxOnlyFocus(lightbox)
   lastFocus = document.activeElement;
+  lightboxOnlyFocus(lightbox);
 };
 
 const closeLightbox = () => {
@@ -126,6 +126,7 @@ const lightboxOnlyFocus = (lightbox) => {
   const focusableElements = lightbox.querySelectorAll('.lightbox__previous, .lightbox__next, .lightbox__close');
   const firstFocusable = focusableElements[0];  
   const lastFocusable = focusableElements[focusableElements.length - 1];
+  firstFocusable.focus();
 
   lightbox.addEventListener('keydown', (event) => {
     if (!(event.key === 'Tab' || event.keyCode === 9)) return;
