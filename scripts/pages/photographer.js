@@ -41,7 +41,7 @@ const displayInsertData = () => {
 
 const initializeModal = () => {
   main.after(modalForm(currentPagePhotographerData.name).getModalDOM());
-  document.querySelector('.contact_button').addEventListener('click', displayModal);
+  document.getElementById('contact_button').addEventListener('click', displayModal);
 };
 
 const initialize = () => {

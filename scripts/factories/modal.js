@@ -1,7 +1,7 @@
 const body = document.getElementById('body');
 const main = document.getElementById('main');
 const header = document.getElementById('header');
-const contactButton = document.querySelector('.photographer-header > .contact_button');
+const contactButton = document.getElementById('contact_button');
 
 export const displayModal = () => {
   const modal = document.getElementById('contact_modal');
@@ -17,21 +17,21 @@ export const displayModal = () => {
     .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
     .forEach(element => element.setAttribute('tabindex', '-1'));
 
-    document.getElementById('modal__close').focus();
+  document.getElementById('modal__close').focus();
 };
 
 const closeModal = () => {
   body.classList.remove('no-scroll');
   main.ariaHidden = 'false';
   header.ariaHidden = 'false';
-  contactButton.style.display = 'block';
 
   document.getElementById('contact_modal').style.display = 'none';
   document
     .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
     .forEach(element =>  element.setAttribute('tabindex', '0'));
 
-  document.querySelector('.contact_button').focus();
+  contactButton.style.display = 'block';
+  contactButton.focus();
 };
 
 export const modalForm = (name) => {
@@ -83,7 +83,10 @@ export const modalForm = (name) => {
     modalFragment
       .getElementById('modal__close')
       .addEventListener('keydown', (event) => { 
-        if(event.key === 'Enter') closeModal(); 
+        if(event.key === 'Enter') {
+          closeModal(); 
+          event.preventDefault();
+        }
     });
 
     modalFragment
