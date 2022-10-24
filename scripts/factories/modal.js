@@ -4,12 +4,15 @@ const header = document.getElementById('header');
 const contactButton = document.querySelector('.photographer-header > .contact_button');
 
 export const displayModal = () => {
+  const modal = document.getElementById('contact_modal');
   body.classList.add('no-scroll'); 
   main.ariaHidden = 'true';
   header.ariaHidden = 'true';
   contactButton.style.display = 'none';
 
-  document.getElementById('contact_modal').style.display = 'block';
+  modalOnlyFocus(modal);
+
+  modal.style.display = 'block';
   document
     .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
     .forEach(element => element.setAttribute('tabindex', '-1'));
@@ -27,6 +30,8 @@ const closeModal = () => {
   document
     .querySelectorAll('article > img, article > video, header > a, .selected, .photographer-medias__like')
     .forEach(element =>  element.setAttribute('tabindex', '0'));
+
+  document.querySelector('.contact_button').focus();
 };
 
 export const modalForm = (name) => {
@@ -66,7 +71,7 @@ export const modalForm = (name) => {
               <label for="message">Votre message</label>
               <textarea id="message" aria-multiline="true" name="message" rows="4"></textarea>
             </div>
-            <button class="contact_button" type="submit">Envoyer</button>
+            <button id='submit_button' class="contact_button" type="submit">Envoyer</button>
           </form>
         </div>
       </div>`);
@@ -79,6 +84,12 @@ export const modalForm = (name) => {
       .getElementById('modal__close')
       .addEventListener('keydown', (event) => { 
         if(event.key === 'Enter') closeModal(); 
+    });
+
+    modalFragment
+      .getElementById('contact_modal')
+      .addEventListener('keydown', (event) => { 
+        if(event.key === 'Escape') closeModal(); 
     });
 
     modalFragment
@@ -182,3 +193,25 @@ const clearError = (element) => {
         element.style.borderColor = "black";
     }
 };
+
+const modalOnlyFocus = (modalFragment) => {
+  const focusableElements = modalFragment.querySelectorAll('#modal__close, input, textarea, #submit_button');
+  const firstFocusable = focusableElements[0];  
+  const lastFocusable = focusableElements[focusableElements.length - 1];
+
+  modalFragment.addEventListener('keydown', (event) => {
+    if (!(event.key === 'Tab' || event.keyCode === 9)) return;
+
+    if (event.shiftKey) {
+      if (document.activeElement === firstFocusable) {
+        lastFocusable.focus();
+        event.preventDefault();
+      }
+    } else {
+      if (document.activeElement === lastFocusable) {
+        firstFocusable.focus();
+        event.preventDefault();
+      }
+    }
+  });
+}

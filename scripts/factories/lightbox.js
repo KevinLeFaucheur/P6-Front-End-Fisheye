@@ -1,16 +1,20 @@
 import * as Data from "../utils/data.js";
 
+let lastFocus;
+
 export const displayLightbox = (mediaObject) => {
   document.getElementById('main').after(lightboxFactory(mediaObject).getLightboxDOM());
   document.getElementById('main').style.display = 'none';
   document.getElementById('header').style.display = 'none';
   document.querySelector('.lightbox').style.display = 'block';
+  lastFocus = document.activeElement;
 };
 
 const closeLightbox = () => {
   document.getElementById('lightbox').remove();
   document.getElementById('main').style.display = 'block';
   document.getElementById('header').style.display = 'block';
+  lastFocus.focus();
 };
 
 const goToItem = (folderName, direction) => {

@@ -61,7 +61,9 @@ export const mediaCard = (mediaObject, name) => {
     mediaFragment
       .querySelector('img, video')
       .addEventListener('keydown', (event) => { 
-        if(event.key === 'Enter') displayLightbox(mediaObject); 
+        if(event.key === 'Enter') {
+          displayLightbox(mediaObject); 
+        }
     });
       
     return mediaFragment;
