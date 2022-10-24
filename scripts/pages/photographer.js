@@ -11,8 +11,6 @@ const main = document.getElementById('main');
 const mediaSection = document.querySelector('.photographer-medias');
 const sortingSection = document.querySelector('.photographer-sorting');
 
-export var lastFocused = document.activeElement;
-
 const currentPagePhotographerData = Data.getPhotographers().find(object => object.id == Data.getCurrentPageIdParam());
 
 export const updateMedias = (mediasData) => {
